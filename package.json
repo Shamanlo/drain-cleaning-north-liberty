@@ -1,0 +1,9 @@
+{
+  "name": "drain-cleaning-north-liberty",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "serve": "npx serve public"
+  }
+}
