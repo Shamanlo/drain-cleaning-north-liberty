@@ -14,14 +14,13 @@ const REVIEWS = {
 export default {
   domain: "draincleaningnorthliberty.com",
   origin: "https://draincleaningnorthliberty.com",
-  siteName: "Drain Cleaning North Liberty",
+  siteName: "Drain Cleaning Pro's of North Liberty",
   city: "North Liberty",
   state: "IA",
   compareCity: "North Liberty",
   web3formsKey: "42264181-3add-41d6-b7d6-ca8e2e279ed3",
-  brandSub: "Drain Cleaning &middot; North Liberty",
   topbar: "Drain &amp; sewer cleaning in North Liberty &middot; Open 24/7",
-  footerBlurb: "A1 Sewer Service is a locally owned drain and sewer company serving North Liberty from its shop in Iowa City, clearing floor drains, main lines, sinks and tubs for homes, townhomes and businesses.",
+  footerBlurb: "Drain Cleaning Pro's of North Liberty clears floor drains, main lines, sinks and tubs for homes, townhomes and businesses across North Liberty. Jobs are completed by A1 Sewer Service, a locally owned crew based in Iowa City.",
   footerArea: "Serving North Liberty, Coralville, Iowa City, Tiffin &amp; the Corridor",
   footerBottom: "Proudly serving North Liberty, from Penn Street to North Kansas Avenue.",
   formPlaceholder: "Example: Floor drain in our finished basement backed up after the washer ran...",
@@ -32,25 +31,16 @@ export default {
 
   // No phone number anywhere on the site, by request.
   business: {
-    name: "A1 Sewer Service",
-    legalName: "A1 Sewer Service LLC",
-    street: "738 Bay Ridge Dr",
-    locality: "Iowa City",
-    region: "IA",
-    postal: "52246",
-    lat: 41.61909,
-    lng: -91.5418944,
+    name: "Drain Cleaning Pro's of North Liberty",
+    short: "Drain Cleaning Pro's",
+    cityLine: "of North Liberty",
     years: "8+",
-    rating: "5.0",
-    reviewCount: "40+",
-    googleUrl: "https://www.google.com/maps?cid=4626743948717435902",
-    sameAs: ["https://www.google.com/maps?cid=4626743948717435902", "https://a1seweriowacity.com/"],
+    // The crew that completes the jobs. Reviews and photos on the site are theirs and are credited to them.
+    crew: { name: "A1 Sewer Service", rating: "5.0", reviewCount: "40+" },
   },
 
   images: {
     hero: { file: "hero-drain-cleaning.webp", alt: "Technician running a drain cable into a backed-up basement floor drain" },
-    logoDark: { file: "logo-dark.png", alt: "A1 Sewer Service" },
-    logoLight: { file: "logo-light.png", alt: "A1 Sewer Service" },
     videoThumb: { file: "drain-cleaning-cost-video.webp", alt: "Drain Cleaning Cost in Iowa City (2026) video" },
     truck: { file: "drain-cleaning-truck-and-equipment.webp", alt: "A1 Sewer Service truck with a drain machine and hose reel set out on a driveway", caption: "Drain machines unloaded and ready to work" },
     truckSide: { file: "a1-sewer-service-truck.webp", alt: "White A1 Sewer Service pickup truck with drain cleaning lettering", caption: "The A1 Sewer Service truck" },
@@ -115,7 +105,7 @@ export default {
       img: "roots",
       short: "Floor drain bubbling when the washer drains? That's usually the main line. We clear it from the cleanout.",
       related: "Clear the line every drain empties into.",
-      title: "Main Sewer Line Cleaning North Liberty | A1 Sewer Service",
+      title: "Main Sewer Line Cleaning North Liberty | Drain Cleaning Pro's of North Liberty",
       metaDescription: "Main sewer line cleaning in North Liberty, IA. Construction debris, wipes, grease and roots cleared at the cleanout. Open 24/7 with free upfront estimates.",
       h2: "Main Line Cleaning for North Liberty's New and Established Homes",
       paras: [
@@ -138,7 +128,7 @@ export default {
       img: "truck",
       short: "For grease, soap scum and lines that clog again weeks after cabling, jetting scrubs the pipe clean.",
       related: "Wash grease and buildup off the pipe walls.",
-      title: "Hydro Jetting North Liberty | A1 Sewer Service",
+      title: "Hydro Jetting North Liberty | Drain Cleaning Pro's of North Liberty",
       metaDescription: "Hydro jetting in North Liberty, IA. Scrubs grease, soap scum and buildup off pipe walls so drains stay clear longer. Free upfront estimates, open 24/7.",
       h2: "Hydro Jetting for North Liberty Lines That Keep Clogging",
       paras: [
@@ -161,7 +151,7 @@ export default {
       img: "swisher",
       short: "We put a camera in the line so you can see the problem yourself: debris, a sag, roots or a broken joint.",
       related: "Find the problem on screen before digging.",
-      title: "Sewer Camera Inspection North Liberty | A1 Sewer Service",
+      title: "Sewer Camera Inspection North Liberty | Drain Cleaning Pro's of North Liberty",
       metaDescription: "Sewer camera inspection in North Liberty, IA. Find debris, sags, roots and broken joints on video, then locate and mark them before any digging. Free estimates.",
       h2: "Sewer Camera Inspections That Show You the Real Problem",
       paras: [
@@ -184,7 +174,7 @@ export default {
       img: "floorDrain",
       short: "Water around the basement floor drain? We clear it fast and look at your sump and drainage while we're there.",
       related: "Fix backed-up basement floor drains.",
-      title: "Basement Floor Drain Cleaning North Liberty | A1 Sewer Service",
+      title: "Basement Floor Drain Cleaning North Liberty | Drain Cleaning Pro's of North Liberty",
       metaDescription: "Basement floor drain cleaning in North Liberty, IA. Backups cleared fast, 24/7, with no after-hours fees until 8 p.m. Sump pump and drainage help too.",
       h2: "Fast Basement Floor Drain Cleaning for North Liberty Homes",
       paras: [
@@ -207,7 +197,7 @@ export default {
       img: "sinkAfter2",
       short: "Kitchen sinks, showers, tubs and toilets cleared properly, with disposal and fixture repairs on the same trip.",
       related: "Clear sinks, tubs, showers and toilets.",
-      title: "Kitchen & Bathroom Drain Cleaning North Liberty | A1 Sewer Service",
+      title: "Kitchen & Bathroom Drain Cleaning North Liberty | Drain Cleaning Pro's of North Liberty",
       metaDescription: "Kitchen sink, shower, tub and toilet drain cleaning in North Liberty, IA, plus disposal and fixture repair. Drain cleaning from $120 with free upfront estimates.",
       h2: "Kitchen and Bathroom Drain Cleaning That Lasts",
       paras: [
@@ -226,20 +216,20 @@ export default {
   ],
 
   home: {
-    title: "Drain Cleaning North Liberty | A1 Sewer Service",
+    title: "Drain Cleaning North Liberty | Drain Cleaning Pro's of North Liberty",
     description: "Drain cleaning in North Liberty, IA from $120. Basement floor drains, main sewer lines, hydro jetting and camera inspections. Open 24/7 with free upfront estimates.",
     heroAlt: "Technician snaking a backed-up basement floor drain",
-    eyebrow: "A1 Sewer Service &middot; North Liberty",
+    eyebrow: "Drain Cleaning Pro's of North Liberty",
     h1: "Drain Cleaning in North Liberty, IA",
-    lead: "Backed-up floor drains, slow kitchen sinks and clogged main lines, cleared by a local, owner-run crew just down the road in Iowa City. Open 24/7, with prices up front and no after-hours fees until 8 p.m.",
-    trust: { strong: "Locally Owned &amp; Operated", span: "About 20 minutes from North Liberty" },
-    stats: [["8+", "Years Experience"], ["$120", "Drain Cleaning From"], ["5.0&#9733;", "Google Rating"]],
+    lead: "Backed-up floor drains, slow kitchen sinks and clogged main lines, cleared by a local, owner-run crew based just down the road in Iowa City. Open 24/7, with prices up front and no after-hours fees until 8 p.m.",
+    trust: { strong: "Local, Owner-Run Crew", span: "About 20 minutes from North Liberty" },
+    stats: [["8+", "Years Experience"], ["$120", "Drain Cleaning From"], ["24/7", "Open Every Day"]],
     formHead: { h2: "Get Your Free Quote", p: "Tell us what's happening and we'll get back to you quickly with an upfront price." },
     about: {
-      eyebrow: "About A1 Sewer Service",
+      eyebrow: "About Drain Cleaning Pro's",
       h2: "Dedicated To Keeping North Liberty Drains Flowing, With Honest Prices Up Front",
       paras: [
-        "A1 Sewer Service is a locally owned drain and sewer company run by owner Andy. Our shop is on the south side of Iowa City, about 20 minutes away, and we clear drains for homes, townhomes and businesses all over North Liberty, from the subdivisions around Penn Street to the townhomes along North Kansas Avenue.",
+        "Drain Cleaning Pro's of North Liberty clears drains for homes, townhomes and businesses all over town, from the subdivisions around Penn Street to the townhomes along North Kansas Avenue. The work is done by A1 Sewer Service, a locally owned crew run by owner Andy from a shop on the south side of Iowa City, about 20 minutes away.",
         "North Liberty has grown fast, and plenty of our calls here are on houses only a few years old. Brand new or decades old, you'll get a straight answer about what's wrong and the price before we start.",
       ],
       points: ["Open 24 hours, 7 days a week", "Free, upfront estimates", "No after-hours fees until 8 p.m.", "Discounts for teachers, seniors &amp; military"],
@@ -255,7 +245,7 @@ export default {
         { icon: "home", h3: "New-Construction Know-How", p: "We see plenty of clogs in newer North Liberty homes and know what to look for, from construction debris to builder-grade fixtures." },
       ],
       img: "dischargeLine",
-      float: { b: "5.0&#9733;", span: "Google rating, 40+ reviews" },
+      float: { b: "$0", span: "After-hours fees before 8 p.m." },
     },
     process: {
       eyebrow: "Our Process",
@@ -268,7 +258,7 @@ export default {
         { h3: "Prove the Flow", p: "We run water to confirm full flow and share tips to keep it clear." },
       ],
     },
-    galleryHead: { eyebrow: "Our Work", h2: "See Our Drain &amp; Sewer Work", p: "Real photos from recent A1 Sewer Service jobs around North Liberty, Iowa City and the Corridor." },
+    galleryHead: { eyebrow: "Our Work", h2: "See Our Drain &amp; Sewer Work", p: "Real photos from recent jobs around North Liberty, Iowa City and the Corridor, completed by our crew at A1 Sewer Service." },
     gallery: ["excavator", "floorDrain", "sumpPit", "trench", "truck", "dischargeLine"],
     reviewsHead: { eyebrow: "Testimonials", h2: "Trusted By Homeowners Across North Liberty &amp; the Corridor" },
     reviews: [REVIEWS.dennis, REVIEWS.howard, REVIEWS.nic, REVIEWS.eugene, REVIEWS.joshua, REVIEWS.noah],
@@ -282,17 +272,17 @@ export default {
   },
 
   about: {
-    title: "About Us | Drain Cleaning North Liberty | A1 Sewer Service",
-    description: "A1 Sewer Service is an owner-run drain and sewer company serving North Liberty, IA from Iowa City. Open 24/7, upfront pricing, 8+ years in the trade.",
-    h1: "About A1 Sewer Service",
+    title: "About Us | Drain Cleaning North Liberty | Drain Cleaning Pro's of North Liberty",
+    description: "Meet Drain Cleaning Pro's of North Liberty: North Liberty drain cleaning by a local, owner-run crew. Open 24/7, upfront pricing and 8+ years in the trade.",
+    h1: "About Drain Cleaning Pro's of North Liberty",
     eyebrow: "Who We Are",
     h2: "Your Local North Liberty Drain Cleaning Specialists",
     paras: [
-      "A1 Sewer Service is a small, owner-operated company. Andy, the owner, has more than eight years in the drain and sewer trade and still runs calls himself. Our shop sits on the south side of Iowa City, about 20 minutes from North Liberty, so we're close by whether your floor drain backs up at noon or at midnight.",
+      "Drain Cleaning Pro's of North Liberty exists to get North Liberty drains running again, with the price agreed before any work starts. Jobs are handled by A1 Sewer Service, a small, owner-operated crew. Andy, the owner, has more than eight years in the drain and sewer trade and still runs calls himself. The crew's shop sits on the south side of Iowa City, about 20 minutes from North Liberty, so help is close whether your floor drain backs up at noon or at midnight.",
       "The way Andy sees it, someone with a backed-up basement deserves a real person who explains the problem, gives a price before starting and treats the home with respect. That's what customers keep pointing to in their reviews: a quick response, careful work and a fair price.",
-      "Along with drain and sewer cleaning, we install sump pumps, run buried downspout and discharge lines, and handle fixture and water heater work for North Liberty, Coralville, Iowa City, Tiffin and the rest of the Corridor.",
+      "Along with drain and sewer cleaning, the crew installs sump pumps, run buried downspout and discharge lines, and handle fixture and water heater work for North Liberty, Coralville, Iowa City, Tiffin and the rest of the Corridor.",
     ],
-    points: ["Owner-operated and locally owned", "8+ years in the drain &amp; sewer trade", "Open 24/7, weekends included", "Discounts for teachers, seniors, military &amp; law enforcement"],
+    points: ["Local, owner-operated crew", "8+ years in the drain &amp; sewer trade", "Open 24/7, weekends included", "Discounts for teachers, seniors, military &amp; law enforcement"],
     img: "truck",
     values: {
       eyebrow: "Our Promise",
@@ -318,7 +308,7 @@ export default {
   },
 
   servicesPage: {
-    title: "Drain Cleaning Services in North Liberty | A1 Sewer Service",
+    title: "Drain Cleaning Services in North Liberty | Drain Cleaning Pro's of North Liberty",
     description: "Drain cleaning services in North Liberty, IA: main sewer lines, hydro jetting, sewer camera inspections, basement floor drains, sinks, tubs and toilets. Open 24/7.",
     h1: "Drain Cleaning Services in North Liberty",
     head: { eyebrow: "What We Do", h2: "Full-Service Drain &amp; Sewer Cleaning for North Liberty Homes", p: "One slow drain or a full sewer backup, we clear it, explain the cause and quote the price before we begin." },
@@ -337,10 +327,10 @@ export default {
   },
 
   gallery: {
-    title: "Drain & Sewer Work Gallery | North Liberty | A1 Sewer Service",
-    description: "Real photos of drain cleaning, sump pump, drain line and sewer jobs completed by A1 Sewer Service around North Liberty, Iowa City and the Corridor.",
+    title: "Drain & Sewer Work Gallery | North Liberty | Drain Cleaning Pro's of North Liberty",
+    description: "Real photos of drain cleaning, sump pump, drain line and sewer jobs around North Liberty, Iowa City and the Corridor, completed by our crew at A1 Sewer Service.",
     h1: "Our Drain &amp; Sewer Work Near North Liberty",
-    head: { eyebrow: "Recent Jobs", h2: "See Our Drain &amp; Sewer Work", p: "Real photos from A1 Sewer Service jobs around North Liberty, Iowa City and the Corridor. No stock photos." },
+    head: { eyebrow: "Recent Jobs", h2: "See Our Drain &amp; Sewer Work", p: "Real photos from our crew's jobs around North Liberty, Iowa City and the Corridor. No stock photos." },
     items: ["excavator", "floorDrain", "roots", "sumpPit", "truck", "sumpDig", "dischargeLine", "downspout2", "downspout", "excavator2", "swisher", "trench", "sinkWide", "disposal", "parkLine"],
     ba: {
       eyebrow: "Before / After",
@@ -356,7 +346,7 @@ export default {
   },
 
   pricingPage: {
-    title: "North Liberty Drain Cleaning Pricing Comparison (2026) | A1 Sewer Service",
+    title: "North Liberty Drain Cleaning Pricing Comparison (2026) | Drain Cleaning Pro's",
     description: "2026 drain cleaning prices for North Liberty, IA: from $120, with basic drain snaking about $250. Watch the video and compare with North Liberty averages.",
     h1: "North Liberty Drain Cleaning Pricing Comparison (2026)",
     crumb: "Pricing Comparison",
@@ -365,7 +355,7 @@ export default {
       eyebrow: "2026 Drain Cleaning Costs",
       h2: "Straightforward Drain Cleaning Prices for North Liberty Homes",
       paras: [
-        "When a drain backs up, the first question is usually what it's going to cost. We put the answer right here. Drain cleaning with A1 Sewer Service starts at <b>$120</b>, and a basic drain snaking runs about <b>$250</b>.",
+        "When a drain backs up, the first question is usually what it's going to cost. We put the answer right here. Our drain cleaning starts at <b>$120</b>, and a basic drain snaking runs about <b>$250</b>.",
         "These prices come from our 2026 drain cleaning cost video for the Iowa City area, which includes North Liberty. Because so many North Liberty homes are newer, a lot of calls here are kitchen lines, bathroom drains and construction debris in the main rather than decades of roots in an old clay pipe. What's in the line, and how easy it is to reach, decides where your job lands.",
         "Below you'll find the video, our three pricing tiers, published North Liberty averages for the same jobs, our after-hours policy and the extras that can change a bill.",
       ],
@@ -382,7 +372,7 @@ export default {
     tiersHead: { eyebrow: "Our Pricing", h2: "What Drain Cleaning Costs in North Liberty", p: "Most North Liberty drain calls land in one of these three tiers. We confirm your price before any work begins." },
     tiersFoot: "Starting and typical prices come from our 2026 Iowa City-area drain cleaning cost video. Your exact price depends on the drain, access and the cause of the clog, and it's confirmed before we start.",
     compareHead: { eyebrow: "Side-By-Side", h2: "How Our Prices Compare to North Liberty Averages", p: "A published North Liberty cost guide lists these prices for common drain jobs. Here's how we price the same work." },
-    compareFoot: 'North Liberty averages are from the <a href="https://www.homeyou.com/ia/drain-cleaning-north-liberty-costs" target="_blank" rel="nofollow noopener">HomeYou North Liberty drain cleaning cost guide</a> (October 2026); its sink, laundry and toilet figures include a $50 service fee. A1 prices are from our 2026 cost video and are confirmed before work starts.',
+    compareFoot: 'North Liberty averages are from the <a href="https://www.homeyou.com/ia/drain-cleaning-north-liberty-costs" target="_blank" rel="nofollow noopener">HomeYou North Liberty drain cleaning cost guide</a> (October 2026); its sink, laundry and toilet figures include a $50 service fee. Our prices are from our 2026 cost video and are confirmed before work starts.',
     afterHours: {
       h2: "Evening &amp; Weekend Drain Cleaning Costs (2026)",
       paras: [
@@ -421,7 +411,7 @@ export default {
     },
     faqH2: "North Liberty Drain Cleaning Pricing Questions",
     faqs: [
-      { q: "How much does drain cleaning cost in North Liberty?", a: "Drain cleaning with A1 Sewer Service starts at $120, and a basic drain snaking runs about $250 (2026). Main sewer lines, hydro jetting and camera inspections are quoted free and up front before any work starts." },
+      { q: "How much does drain cleaning cost in North Liberty?", a: "With Drain Cleaning Pro's of North Liberty, drain cleaning starts at $120, and a basic drain snaking runs about $250 (2026). Main sewer lines, hydro jetting and camera inspections are quoted free and up front before any work starts." },
       { q: "How much does it cost to snake a drain in North Liberty?", a: "About $250 for a basic drain snaking, with simple single-drain clogs starting at $120. Your price depends on the drain, how we reach the line and what's causing the clog." },
       { q: "Why would a newer North Liberty home have a clogged main line?", a: "New construction can leave drywall dust, scraps and packaging in the pipes, and a main line that was never flushed out can clog the first time something heavy goes down. If your home is still under a builder warranty, mention it when you reach out." },
       { q: "Do you charge more for nights and weekends?", a: "Not before 8 p.m. There are no after-hours fees until 8 p.m., weekends included. After 8 p.m. an after-hours rate may apply, and you'll hear what it is before we head out." },
@@ -432,16 +422,16 @@ export default {
   },
 
   contact: {
-    title: "Contact | Drain Cleaning North Liberty | A1 Sewer Service",
-    description: "Request a free, upfront drain cleaning estimate in North Liberty, IA from A1 Sewer Service. Open 24/7 with no after-hours fees until 8 p.m.",
-    h1: "Contact A1 Sewer Service",
+    title: "Contact | Drain Cleaning North Liberty | Drain Cleaning Pro's of North Liberty",
+    description: "Request a free, upfront drain cleaning estimate in North Liberty, IA from Drain Cleaning Pro's of North Liberty. Open 24/7 with no after-hours fees until 8 p.m.",
+    h1: "Contact Drain Cleaning Pro's of North Liberty",
     h2: "Book Your Free Drain Cleaning Estimate in North Liberty",
     paras: [
       "Let us know which drains are slow or backing up, and anything you've already tried. We'll get back to you with what it likely needs and an upfront price.",
       "We're open 24/7 and about 20 minutes from North Liberty, with no after-hours fees until 8 p.m., weekends included.",
     ],
     formP: "Send this and we'll get back to you quickly.",
-    reviewsH2: "What Customers Say About A1 Sewer Service",
+    reviewsH2: "What North Liberty-Area Customers Say",
     reviews: [REVIEWS.howard, REVIEWS.nic, REVIEWS.dennis],
   },
 };

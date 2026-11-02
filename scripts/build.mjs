@@ -104,19 +104,14 @@ const businessLd = {
   "@type": "Plumber",
   "@id": abs("/#business"),
   name: B.name,
-  legalName: B.legalName,
   description: site.schemaDescription,
   url: abs("/"),
-  logo: abs("/images/logo-dark.png"),
+  logo: abs("/favicon-512.png"),
   image: [abs("/og-image.jpg"), abs(IMG[site.schemaImage].src)],
-  address: { "@type": "PostalAddress", streetAddress: B.street, addressLocality: B.locality, addressRegion: B.region, postalCode: B.postal, addressCountry: "US" },
-  geo: { "@type": "GeoCoordinates", latitude: B.lat, longitude: B.lng },
   areaServed: site.areas.map((a) => ({ "@type": "City", name: `${a}, ${site.state}` })),
   openingHoursSpecification: [{ "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], opens: "00:00", closes: "23:59" }],
   priceRange: `${money(site.pricing.start)}+`,
   currenciesAccepted: "USD",
-  hasMap: B.googleUrl,
-  sameAs: B.sameAs,
   knowsAbout: SERVICES.map((s) => s.name),
 };
 const crumbsLd = (items) => ({
@@ -162,6 +157,12 @@ function nav(active) {
       </ul>`;
 }
 
+const brandMark = (light = false) =>
+  `<a href="/" class="brand${light ? " brand--light" : ""}" aria-label="${esc(strip(B.name))} home">
+        <span class="brand-mark">${icon("droplet")}</span>
+        <span class="brand-name">${B.short}<small>${B.cityLine}</small></span>
+      </a>`;
+
 function header(active) {
   return `<div class="topbar">
     <div class="container">
@@ -169,16 +170,13 @@ function header(active) {
         <span>${icon("clock")}${site.topbar}</span>
         <span class="hide-sm">${icon("moon")}No after-hours fees until 8 p.m., weekends included</span>
       </div>
-      <a class="topbar-rating" href="${B.googleUrl}" target="_blank" rel="noopener">${stars()}<b>${B.rating}</b> on Google</a>
+      <span class="topbar-rating">${icon("clipboard")}Free, upfront estimates</span>
     </div>
   </div>
 
   <header class="site-header">
     <div class="container">
-      <a href="/" class="brand" aria-label="${esc(B.name)} home">
-        <img src="/images/logo-dark.png" alt="${esc(B.name)} logo" width="${IMG.logoDark.w}" height="${IMG.logoDark.h}">
-        <span class="brand-sub">${site.brandSub}</span>
-      </a>
+      ${brandMark()}
       ${nav(active)}
       <div class="header-cta">
         ${arrowBtn("/contact", "Free Estimate", "btn btn--primary btn--sm")}
@@ -193,9 +191,8 @@ function footer() {
     <div class="container">
       <div class="f-grid">
         <div>
-          <a href="/" class="brand brand--light"><img src="/images/logo-light.png" alt="${esc(B.name)} logo" width="${IMG.logoLight.w}" height="${IMG.logoLight.h}" loading="lazy"></a>
+          ${brandMark(true)}
           <p>${site.footerBlurb}</p>
-          <a class="f-rating" href="${B.googleUrl}" target="_blank" rel="noopener">${stars()}<span><b>${B.rating}</b> rating on Google &middot; ${B.reviewCount} reviews</span></a>
         </div>
         <div>
           <h4>Quick Links</h4>
@@ -219,14 +216,14 @@ function footer() {
           <ul class="f-contact">
             <li>${icon("mail")}<a href="/contact">Request a free estimate online</a></li>
             <li>${icon("clock")}<span>Open 24 hours, 7 days a week</span></li>
-            <li>${icon("pin")}<span>${B.street}, ${B.locality}, ${B.region} ${B.postal}</span></li>
+            <li>${icon("wrench")}<span>Jobs completed by ${B.crew.name}</span></li>
             <li>${icon("route")}<span>${site.footerArea}</span></li>
             <li>${icon("globe")}<span>Also serving <a href="${site.sister.url}">${site.sister.label}</a></span></li>
           </ul>
         </div>
       </div>
       <div class="f-bottom">
-        <span>&copy; <span data-year>${TODAY.slice(0, 4)}</span> ${B.legalName}. All Rights Reserved.</span>
+        <span>&copy; <span data-year>${TODAY.slice(0, 4)}</span> ${B.name}. All Rights Reserved.</span>
         <span>${site.footerBottom}</span>
       </div>
     </div>
@@ -266,7 +263,7 @@ function layout({ path: p, title, description, body, schema = [], noindex = fals
   <meta property="og:image" content="${abs("/og-image.jpg")}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="${esc(`Drain cleaning in ${site.city}, ${site.state} by ${B.name}`)}">
+  <meta property="og:image:alt" content="${esc(`Drain cleaning in ${site.city}, ${site.state} by ${strip(B.name)}`)}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${esc(title)}">
   <meta name="twitter:description" content="${esc(description)}">
@@ -363,7 +360,8 @@ function form(subject, { head, compact = false, idPrefix = "f" } = {}) {
 }
 
 function reviewCards(list) {
-  return `<div class="t-grid">
+  return `<p class="t-attr reveal">${icon("shield")}<span>Verbatim Google reviews for <b>${B.crew.name}</b>, the local crew that completes our drain cleaning jobs.</span></p>
+      <div class="t-grid">
         ${list
           .map((r) => {
             const initials = r.name.replace(/[^A-Za-z ]/g, "").split(" ").filter(Boolean).map((w) => w[0]).join("").slice(0, 2).toUpperCase();
@@ -375,7 +373,7 @@ function reviewCards(list) {
           })
           .join("\n        ")}
       </div>
-      <div class="t-foot reveal"><a class="rating-pill" href="${B.googleUrl}" target="_blank" rel="noopener">${stars()}<span><b>${B.rating}</b> on Google &middot; ${B.reviewCount} reviews</span>${icon("arrow")}</a></div>`;
+      <div class="t-foot reveal"><span class="rating-pill">${stars()}<span>${B.crew.name}: <b>${B.crew.rating}</b> on Google &middot; ${B.crew.reviewCount} reviews</span></span></div>`;
 }
 
 function galleryGrid(keys) {
@@ -764,14 +762,14 @@ ${ctaStrip(g.cta)}`;
       ${sectionHead(pg.compareHead)}
       <div class="compare-wrap reveal">
         <table class="compare-table">
-          <thead><tr><th>Drain Job</th><th>Published ${site.compareCity} Average</th><th>${B.name}</th></tr></thead>
+          <thead><tr><th>Drain Job</th><th>Published ${site.compareCity} Average</th><th>${B.short}</th></tr></thead>
           <tbody>
             ${P.compare
               .map(
                 (r) => `<tr>
               <td data-label="Drain Job"><b>${r.job}</b>${r.sub ? `<small>${r.sub}</small>` : ""}</td>
               <td data-label="Published ${site.compareCity} Average">${r.avg}</td>
-              <td data-label="${B.name}"><b>${r.ours}</b>${r.oursSub ? `<small>${r.oursSub}</small>` : ""}</td>
+              <td data-label="${B.short}"><b>${r.ours}</b>${r.oursSub ? `<small>${r.oursSub}</small>` : ""}</td>
             </tr>`
               )
               .join("\n            ")}
@@ -883,7 +881,7 @@ ${ctaStrip(pg.cta)}`;
         <ul class="info-list">
           <li>${icon("clock")}<div><b>Hours</b><span>Open 24 hours, 7 days a week</span></div></li>
           <li>${icon("moon")}<div><b>After-hours fees</b><span>None until 8 p.m., weekends included</span></div></li>
-          <li>${icon("pin")}<div><b>Shop</b><span>${B.street}, ${B.locality}, ${B.region} ${B.postal}</span></div></li>
+          <li>${icon("wrench")}<div><b>Who does the work</b><span>${B.crew.name}, a locally owned crew based in Iowa City</span></div></li>
           <li>${icon("route")}<div><b>Service area</b><span>${site.areas.join(", ")}</span></div></li>
           <li>${icon("heart")}<div><b>Community discounts</b><span>Teachers, seniors, military &amp; law enforcement</span></div></li>
         </ul>
