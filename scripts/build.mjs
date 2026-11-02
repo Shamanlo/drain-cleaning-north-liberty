@@ -92,6 +92,54 @@ const icon = (name, cls = "ico-svg") =>
   `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name]}</svg>`;
 const arrowBtn = (href, label, cls = "btn btn--primary") => `<a href="${href}" class="${cls}">${label} ${icon("arrow")}</a>`;
 
+// ---------- UI labels ----------
+// Defaults below; site.config.mjs can override any of them with `labels` so sister sites don't read the same.
+const L = {
+  estimateBtn: "Get My Free Estimate",
+  formNote: "Free, upfront estimate. No obligation.",
+  contactFormH2: "Request Your Free Estimate",
+  cardLink: "Learn More",
+  featuredLink: "Get Started",
+  emergencyLink: "Request Service",
+  heroPricesBtn: `See ${site.city} Prices`,
+  expBadge: "Years Serving<br>Eastern Iowa",
+  expBadgeAbout: "Years in<br>the Trade",
+  moreAbout: "More About Us",
+  viewServices: "View All Services",
+  viewGallery: "View Full Gallery",
+  aboutBtn: "Get A Free Estimate",
+  stripStart: "Drain cleaning from",
+  stripSnake: "Basic drain snaking",
+  stripAfter: "After-hours fees before 8 p.m.",
+  stripBtn: `See ${site.city} Pricing`,
+  offerTitle: "What We Offer",
+  sidePriceLink: `See ${site.city} drain cleaning prices`,
+  relatedEyebrow: "Explore More",
+  relatedH2: "Related Drain Services",
+  tldrLink: "Watch the breakdown",
+  videoEyebrow: "Watch The Video",
+  videoFactStart: "Drain cleaning starts at",
+  videoFactSnake: "Basic drain snaking",
+  popularFlag: "Most Common",
+  quoteTier: "Quote This Job",
+  compareJob: "Drain Job",
+  compareAvg: `Published ${site.compareCity} Average`,
+  afterEyebrow: "Nights &amp; Weekends",
+  afterWhen: "When You Call",
+  afterFee: "After-Hours Fee",
+  addOnsEyebrow: "Add-Ons",
+  faqEyebrow: "FAQ",
+  contactEyebrow: "Free Estimates",
+  contactInfo: [
+    ["clock", "Hours", "Open 24 hours, 7 days a week"],
+    ["moon", "After-hours fees", "None until 8 p.m., weekends included"],
+    ["clipboard", "Estimates", "Free and upfront, before any work starts"],
+    ["route", "Service area", "{areas}"],
+    ["heart", "Community discounts", "Teachers, seniors, military &amp; law enforcement"],
+  ],
+  ...(site.labels || {}),
+};
+
 // ---------- URLs ----------
 const PRICING = "/" + site.pricing.slug;
 const SERVICES = site.services;
@@ -136,6 +184,8 @@ const faqLd = (faqs) => ({
 
 // ---------- layout ----------
 const CSS_V = hashFile("css/styles.css");
+// Per-site colour overrides (site.theme keys are CSS custom property names without the leading --)
+const THEME_CSS = site.theme ? `\n  <style>:root{${Object.entries(site.theme).map(([k, v]) => `--${k}:${v}`).join(";")}}</style>` : "";
 const JS_V = hashFile("js/main.js");
 
 function nav(active) {
@@ -251,7 +301,7 @@ function layout({ path: p, title, description, body, schema = [], noindex = fals
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <meta name="theme-color" content="#0b2545">
+  <meta name="theme-color" content="${site.theme?.navy || "#0b2545"}">
   <meta property="og:title" content="${esc(title)}">
   <meta property="og:description" content="${esc(description)}">
   <meta property="og:type" content="${ogType}">
@@ -269,7 +319,7 @@ function layout({ path: p, title, description, body, schema = [], noindex = fals
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/styles.css?v=${CSS_V}">${preload ? `\n  <link rel="preload" as="image" href="${preload}" fetchpriority="high">` : ""}
+  <link rel="stylesheet" href="/css/styles.css?v=${CSS_V}">${THEME_CSS}${preload ? `\n  <link rel="preload" as="image" href="${preload}" fetchpriority="high">` : ""}
   ${ld}
 </head>
 <body>
@@ -308,7 +358,7 @@ const pageHero = (h1, crumbs, lead) => `  <section class="page-hero">
     </div>
   </section>`;
 
-const ctaStrip = ({ h2, p, btn = "Get My Free Estimate" }, padTop = false) => `  <section class="section"${padTop ? ' style="padding-top:0"' : ""}>
+const ctaStrip = ({ h2, p, btn = L.estimateBtn }, padTop = false) => `  <section class="section"${padTop ? ' style="padding-top:0"' : ""}>
     <div class="container"><div class="cta-strip reveal"><div><h2>${h2}</h2><p>${p}</p></div>${arrowBtn("/contact", btn, "btn btn--light")}</div></div>
   </section>`;
 
@@ -351,8 +401,8 @@ function form(subject, { head, compact = false, idPrefix = "f" } = {}) {
           </select>
         </div>
         <div class="field"><label for="${id("message")}">What's going on?</label><textarea id="${id("message")}" name="message" placeholder="${esc(site.formPlaceholder)}" required></textarea></div>
-        <button type="submit" class="btn btn--primary btn--block">Get My Free Estimate ${icon("arrow")}</button>
-        <p class="form-note">${icon("shield")}Free, upfront estimate. No obligation.</p>
+        <button type="submit" class="btn btn--primary btn--block">${L.estimateBtn} ${icon("arrow")}</button>
+        <p class="form-note">${icon("shield")}${L.formNote}</p>
         <p class="form-status" role="status" aria-live="polite"></p>
       </form>`;
 }
@@ -376,7 +426,7 @@ function beforeAfter(ba) {
       </div>`;
 }
 
-function serviceCards(list, { withImg = true, link = "Learn More" } = {}) {
+function serviceCards(list, { withImg = true, link = L.cardLink } = {}) {
   return `<div class="cards${list.length === 3 || list.length === 6 ? " cards--3" : ""}">
         ${list
           .map(
@@ -385,7 +435,7 @@ function serviceCards(list, { withImg = true, link = "Learn More" } = {}) {
           <div class="s-body"><span class="s-ico">${icon(s.icon)}</span>
             <h3>${s.name}</h3>
             <p>${s.short}</p>
-            ${s.slug ? `<a href="/${s.slug}" class="s-link">${link} ${icon("arrow")}</a>` : `<a href="/contact" class="s-link">Request Service ${icon("arrow")}</a>`}
+            ${s.slug ? `<a href="/${s.slug}" class="s-link">${link} ${icon("arrow")}</a>` : `<a href="/contact" class="s-link">${L.emergencyLink} ${icon("arrow")}</a>`}
           </div>
         </article>`
           )
@@ -418,8 +468,8 @@ const pages = [];
         <h1>${h.h1}</h1>
         <p class="lead">${h.lead}</p>
         <div class="hero-cta">
-          ${arrowBtn("/contact", "Get My Free Estimate")}
-          <a href="${PRICING}" class="btn btn--ghost-light">See ${site.city} Prices</a>
+          ${arrowBtn("/contact", L.estimateBtn)}
+          <a href="${PRICING}" class="btn btn--ghost-light">${L.heroPricesBtn}</a>
         </div>
         <div class="hero-trust">
           <span class="ico">${icon("award")}</span>
@@ -437,7 +487,7 @@ const pages = [];
     <div class="container about-grid">
       <div class="about-media reveal">
         ${img(h.about.img)}
-        <div class="exp-badge"><b>${B.years}</b><span>Years Serving<br>Eastern Iowa</span></div>
+        <div class="exp-badge"><b>${B.years}</b><span>${L.expBadge}</span></div>
       </div>
       <div class="about-body reveal">
         <span class="eyebrow">${h.about.eyebrow}</span>
@@ -446,7 +496,7 @@ const pages = [];
         <ul class="about-points">
           ${h.about.points.map((t) => `<li>${icon("check")}${t}</li>`).join("\n          ")}
         </ul>
-        ${arrowBtn("/about", "More About Us")}
+        ${arrowBtn("/about", L.moreAbout)}
       </div>
     </div>
   </section>
@@ -454,8 +504,8 @@ const pages = [];
   <section class="section section--alt" id="services">
     <div class="container">
       ${sectionHead(h.servicesHead)}
-      ${serviceCards(featured, { link: "Get Started" })}
-      <div class="center-btn reveal">${arrowBtn("/services", "View All Services", "btn btn--ghost")}</div>
+      ${serviceCards(featured, { link: L.featuredLink })}
+      <div class="center-btn reveal">${arrowBtn("/services", L.viewServices, "btn btn--ghost")}</div>
     </div>
   </section>
 
@@ -480,10 +530,10 @@ const pages = [];
       ${sectionHead(h.process)}
       ${steps(h.process.steps)}
       <div class="price-strip reveal">
-        <div class="ps-item"><span>Drain cleaning from</span><b>${money(site.pricing.start)}</b></div>
-        <div class="ps-item"><span>Basic drain snaking</span><b>about ${money(site.pricing.snake)}</b></div>
-        <div class="ps-item"><span>After-hours fees before 8 p.m.</span><b>$0</b></div>
-        <a href="${PRICING}" class="btn btn--primary">See ${site.city} Pricing ${icon("arrow")}</a>
+        <div class="ps-item"><span>${L.stripStart}</span><b>${money(site.pricing.start)}</b></div>
+        <div class="ps-item"><span>${L.stripSnake}</span><b>about ${money(site.pricing.snake)}</b></div>
+        <div class="ps-item"><span>${L.stripAfter}</span><b>$0</b></div>
+        <a href="${PRICING}" class="btn btn--primary">${L.stripBtn} ${icon("arrow")}</a>
       </div>
     </div>
   </section>
@@ -492,7 +542,7 @@ const pages = [];
     <div class="container">
       ${sectionHead(h.galleryHead)}
       ${galleryGrid(h.gallery)}
-      <div class="center-btn reveal">${arrowBtn("/gallery", "View Full Gallery", "btn btn--ghost")}</div>
+      <div class="center-btn reveal">${arrowBtn("/gallery", L.viewGallery, "btn btn--ghost")}</div>
     </div>
   </section>
 
@@ -529,9 +579,9 @@ ${ctaStrip(h.cta)}`;
         <h2>${a.h2}</h2>
         ${a.paras.map((t) => `<p>${t}</p>`).join("\n        ")}
         ${ticks(a.points)}
-        ${arrowBtn("/contact", "Get A Free Estimate")}
+        ${arrowBtn("/contact", L.aboutBtn)}
       </div>
-      <div class="reveal media-stack">${img(a.img)}<div class="exp-badge exp-badge--inline"><b>${B.years}</b><span>Years in<br>the Trade</span></div></div>
+      <div class="reveal media-stack">${img(a.img)}<div class="exp-badge exp-badge--inline"><b>${B.years}</b><span>${L.expBadgeAbout}</span></div></div>
     </div>
   </section>
 
@@ -605,7 +655,7 @@ for (const s of SERVICES) {
         <span class="eyebrow">${s.name}</span>
         <h2>${s.h2}</h2>
         ${s.paras.map((t) => `<p>${t}</p>`).join("\n        ")}
-        <h3>What We Offer</h3>
+        <h3>${L.offerTitle}</h3>
         ${ticks(s.offer)}
         <h3>${s.signsTitle}</h3>
         ${ticks(s.signs, "plus")}
@@ -615,7 +665,7 @@ for (const s of SERVICES) {
         <div class="side-card">
           <h3 class="side-title">${s.priceTitle}</h3>
           <p>${s.priceNote}</p>
-          <a href="${PRICING}" class="s-link">See ${site.city} drain cleaning prices ${icon("arrow")}</a>
+          <a href="${PRICING}" class="s-link">${L.sidePriceLink} ${icon("arrow")}</a>
         </div>
       </div>
     </div>
@@ -623,7 +673,7 @@ for (const s of SERVICES) {
 
   <section class="section section--alt">
     <div class="container">
-      ${sectionHead({ eyebrow: "Explore More", h2: "Related Drain Services" })}
+      ${sectionHead({ eyebrow: L.relatedEyebrow, h2: L.relatedH2 })}
       ${serviceCards(related.map((r) => ({ ...r, short: r.related })), { withImg: false })}
     </div>
   </section>
@@ -675,7 +725,7 @@ ${ctaStrip(g.cta)}`;
 
   <section class="tldr-bar">
     <div class="container">
-      <p class="tldr"><b>TLDR:</b> ${pg.tldr} <a href="#video">Watch the breakdown ${icon("down")}</a></p>
+      <p class="tldr"><b>TLDR:</b> ${pg.tldr} <a href="#video">${L.tldrLink} ${icon("down")}</a></p>
     </div>
   </section>
 
@@ -686,7 +736,7 @@ ${ctaStrip(g.cta)}`;
         <h2>${pg.intro.h2}</h2>
         ${pg.intro.paras.map((t) => `<p>${t}</p>`).join("\n        ")}
         ${ticks(pg.intro.points)}
-        ${arrowBtn("/contact", "Get My Free Estimate")}
+        ${arrowBtn("/contact", L.estimateBtn)}
       </div>
       <div class="reveal">${img(pg.intro.img)}</div>
     </div>
@@ -695,12 +745,12 @@ ${ctaStrip(g.cta)}`;
   <section class="section section--navy" id="video">
     <div class="container video-grid">
       <div class="reveal">
-        <span class="eyebrow eyebrow--light">Watch The Video</span>
+        <span class="eyebrow eyebrow--light">${L.videoEyebrow}</span>
         <h2>${pg.video.h2}</h2>
         ${pg.video.paras.map((t) => `<p>${t}</p>`).join("\n        ")}
         <ul class="video-facts">
-          <li><b>${money(P.start)}</b><span>Drain cleaning starts at</span></li>
-          <li><b>${money(P.snake)}</b><span>Basic drain snaking</span></li>
+          <li><b>${money(P.start)}</b><span>${L.videoFactStart}</span></li>
+          <li><b>${money(P.snake)}</b><span>${L.videoFactSnake}</span></li>
         </ul>
       </div>
       ${videoEmbed(v)}
@@ -714,7 +764,7 @@ ${ctaStrip(g.cta)}`;
         ${P.tiers
           .map(
             (t) => `<article class="p-card${t.featured ? " featured" : ""} reveal">
-          ${t.featured ? '<span class="p-flag">Most Common</span>' : ""}
+          ${t.featured ? `<span class="p-flag">${L.popularFlag}</span>` : ""}
           <h3>${t.name}</h3>
           <p class="p-lead">${t.lead}</p>
           <div class="p-price">${t.price}</div>
@@ -722,7 +772,7 @@ ${ctaStrip(g.cta)}`;
           <ul>
             ${t.items.map((i) => `<li>${icon("check")}<span>${i}</span></li>`).join("\n            ")}
           </ul>
-          ${arrowBtn("/contact", "Quote This Job", t.featured ? "btn btn--primary" : "btn btn--ghost")}
+          ${arrowBtn("/contact", L.quoteTier, t.featured ? "btn btn--primary" : "btn btn--ghost")}
         </article>`
           )
           .join("\n        ")}
@@ -736,13 +786,13 @@ ${ctaStrip(g.cta)}`;
       ${sectionHead(pg.compareHead)}
       <div class="compare-wrap reveal">
         <table class="compare-table">
-          <thead><tr><th>Drain Job</th><th>Published ${site.compareCity} Average</th><th>${B.short}</th></tr></thead>
+          <thead><tr><th>${L.compareJob}</th><th>${L.compareAvg}</th><th>${B.short}</th></tr></thead>
           <tbody>
             ${P.compare
               .map(
                 (r) => `<tr>
-              <td data-label="Drain Job"><b>${r.job}</b>${r.sub ? `<small>${r.sub}</small>` : ""}</td>
-              <td data-label="Published ${site.compareCity} Average">${r.avg}</td>
+              <td data-label="${L.compareJob}"><b>${r.job}</b>${r.sub ? `<small>${r.sub}</small>` : ""}</td>
+              <td data-label="${L.compareAvg}">${r.avg}</td>
               <td data-label="${B.short}"><b>${r.ours}</b>${r.oursSub ? `<small>${r.oursSub}</small>` : ""}</td>
             </tr>`
               )
@@ -757,14 +807,14 @@ ${ctaStrip(g.cta)}`;
   <section class="section section--alt">
     <div class="container split">
       <div class="prose reveal">
-        <span class="eyebrow">Nights &amp; Weekends</span>
+        <span class="eyebrow">${L.afterEyebrow}</span>
         <h2>${pg.afterHours.h2}</h2>
         ${pg.afterHours.paras.map((t) => `<p>${t}</p>`).join("\n        ")}
         <div class="compare-wrap compare-wrap--tight">
           <table class="compare-table">
-            <thead><tr><th>When You Call</th><th>After-Hours Fee</th></tr></thead>
+            <thead><tr><th>${L.afterWhen}</th><th>${L.afterFee}</th></tr></thead>
             <tbody>
-              ${P.afterHours.map(([w, f]) => `<tr><td data-label="When You Call"><b>${w}</b></td><td data-label="After-Hours Fee">${f}</td></tr>`).join("\n              ")}
+              ${P.afterHours.map(([w, f]) => `<tr><td data-label="${L.afterWhen}"><b>${w}</b></td><td data-label="${L.afterFee}">${f}</td></tr>`).join("\n              ")}
             </tbody>
           </table>
         </div>
@@ -784,7 +834,7 @@ ${ctaStrip(g.cta)}`;
     <div class="container split">
       <div class="reveal">${img(pg.addOns.img)}</div>
       <div class="prose reveal">
-        <span class="eyebrow">Add-Ons</span>
+        <span class="eyebrow">${L.addOnsEyebrow}</span>
         <h2>${pg.addOns.h2}</h2>
         <p>${pg.addOns.p}</p>
         ${ticks(pg.addOns.items, "plus")}
@@ -802,7 +852,7 @@ ${ctaStrip(g.cta)}`;
 
   <section class="section section--alt">
     <div class="container">
-      ${sectionHead({ eyebrow: "FAQ", h2: pg.faqH2 })}
+      ${sectionHead({ eyebrow: L.faqEyebrow, h2: pg.faqH2 })}
       <div class="faq">
         ${pg.faqs.map((f, i) => `<details class="reveal"${i === 0 ? " open" : ""}><summary>${f.q}</summary><p>${f.a}</p></details>`).join("\n        ")}
       </div>
@@ -849,18 +899,14 @@ ${ctaStrip(pg.cta)}`;
   <section class="section">
     <div class="container contact-grid">
       <div class="prose reveal">
-        <span class="eyebrow">Free Estimates</span>
+        <span class="eyebrow">${L.contactEyebrow}</span>
         <h2>${c.h2}</h2>
         ${c.paras.map((t) => `<p>${t}</p>`).join("\n        ")}
         <ul class="info-list">
-          <li>${icon("clock")}<div><b>Hours</b><span>Open 24 hours, 7 days a week</span></div></li>
-          <li>${icon("moon")}<div><b>After-hours fees</b><span>None until 8 p.m., weekends included</span></div></li>
-          <li>${icon("clipboard")}<div><b>Estimates</b><span>Free and upfront, before any work starts</span></div></li>
-          <li>${icon("route")}<div><b>Service area</b><span>${site.areas.join(", ")}</span></div></li>
-          <li>${icon("heart")}<div><b>Community discounts</b><span>Teachers, seniors, military &amp; law enforcement</span></div></li>
+          ${L.contactInfo.map(([ic, t, v]) => `<li>${icon(ic)}<div><b>${t}</b><span>${v.replace("{areas}", site.areas.join(", "))}</span></div></li>`).join("\n          ")}
         </ul>
       </div>
-      ${form(`New drain cleaning request — ${site.domain} (Contact page)`, { idPrefix: "contact", head: { h2: "Request Your Free Estimate", p: c.formP } })}
+      ${form(`New drain cleaning request — ${site.domain} (Contact page)`, { idPrefix: "contact", head: { h2: L.contactFormH2, p: c.formP } })}
     </div>
   </section>`;
   pages.push({ file: "contact.html", html: layout({ path: "/contact", title: c.title, description: c.description, body, schema: [crumbsLd([["Home", "/"], ["Contact", "/contact"]])] }) });
