@@ -90,7 +90,6 @@ const ICONS = {
 };
 const icon = (name, cls = "ico-svg") =>
   `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name]}</svg>`;
-const stars = () => `<span class="stars" aria-label="5 out of 5 stars">${icon("star").repeat(5)}</span>`;
 const arrowBtn = (href, label, cls = "btn btn--primary") => `<a href="${href}" class="${cls}">${label} ${icon("arrow")}</a>`;
 
 // ---------- URLs ----------
@@ -216,7 +215,6 @@ function footer() {
           <ul class="f-contact">
             <li>${icon("mail")}<a href="/contact">Request a free estimate online</a></li>
             <li>${icon("clock")}<span>Open 24 hours, 7 days a week</span></li>
-            <li>${icon("wrench")}<span>Jobs completed by ${B.crew.name}</span></li>
             <li>${icon("route")}<span>${site.footerArea}</span></li>
             <li>${icon("globe")}<span>Also serving <a href="${site.sister.url}">${site.sister.label}</a></span></li>
           </ul>
@@ -357,23 +355,6 @@ function form(subject, { head, compact = false, idPrefix = "f" } = {}) {
         <p class="form-note">${icon("shield")}Free, upfront estimate. No obligation.</p>
         <p class="form-status" role="status" aria-live="polite"></p>
       </form>`;
-}
-
-function reviewCards(list) {
-  return `<p class="t-attr reveal">${icon("shield")}<span>Verbatim Google reviews for <b>${B.crew.name}</b>, the local crew that completes our drain cleaning jobs.</span></p>
-      <div class="t-grid">
-        ${list
-          .map((r) => {
-            const initials = r.name.replace(/[^A-Za-z ]/g, "").split(" ").filter(Boolean).map((w) => w[0]).join("").slice(0, 2).toUpperCase();
-            return `<figure class="t-card reveal">
-          <div class="t-top">${stars()}<span class="g-badge">Google review</span></div>
-          <blockquote><p>${r.text}</p></blockquote>
-          <figcaption class="who"><span class="av">${initials}</span><div><b>${r.name}</b><span>${r.date ? r.date : "Google review"}</span></div></figcaption>
-        </figure>`;
-          })
-          .join("\n        ")}
-      </div>
-      <div class="t-foot reveal"><span class="rating-pill">${stars()}<span>${B.crew.name}: <b>${B.crew.rating}</b> on Google &middot; ${B.crew.reviewCount} reviews</span></span></div>`;
 }
 
 function galleryGrid(keys) {
@@ -517,19 +498,12 @@ const pages = [];
 
   <section class="section section--alt">
     <div class="container">
-      ${sectionHead(h.reviewsHead)}
-      ${reviewCards(h.reviews)}
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
       ${sectionHead(h.ba)}
       ${beforeAfter(h.ba)}
     </div>
   </section>
 
-${ctaStrip(h.cta, true)}`;
+${ctaStrip(h.cta)}`;
   pages.push({
     file: "index.html",
     html: layout({
@@ -881,19 +855,12 @@ ${ctaStrip(pg.cta)}`;
         <ul class="info-list">
           <li>${icon("clock")}<div><b>Hours</b><span>Open 24 hours, 7 days a week</span></div></li>
           <li>${icon("moon")}<div><b>After-hours fees</b><span>None until 8 p.m., weekends included</span></div></li>
-          <li>${icon("wrench")}<div><b>Who does the work</b><span>${B.crew.name}, a locally owned crew based in Iowa City</span></div></li>
+          <li>${icon("clipboard")}<div><b>Estimates</b><span>Free and upfront, before any work starts</span></div></li>
           <li>${icon("route")}<div><b>Service area</b><span>${site.areas.join(", ")}</span></div></li>
           <li>${icon("heart")}<div><b>Community discounts</b><span>Teachers, seniors, military &amp; law enforcement</span></div></li>
         </ul>
       </div>
       ${form(`New drain cleaning request — ${site.domain} (Contact page)`, { idPrefix: "contact", head: { h2: "Request Your Free Estimate", p: c.formP } })}
-    </div>
-  </section>
-
-  <section class="section section--alt">
-    <div class="container">
-      ${sectionHead({ eyebrow: "Reviews", h2: c.reviewsH2 })}
-      ${reviewCards(c.reviews)}
     </div>
   </section>`;
   pages.push({ file: "contact.html", html: layout({ path: "/contact", title: c.title, description: c.description, body, schema: [crumbsLd([["Home", "/"], ["Contact", "/contact"]])] }) });

@@ -2,15 +2,6 @@
 // Prices come from the 2026 cost video (https://youtu.be/IziRxlTAhOM): drain cleaning from $120,
 // basic drain snaking about $250. Change `pricing.start` / `pricing.snake` and the tier text together.
 
-const REVIEWS = {
-  nic: { name: "Nic H.", date: "August 2026", text: "I’ve had a recurring issue for years with my floor drain backing up. Andy at A1 Sewer Services was the first one to do a more thorough inspection rather than just clearing out the line. He also discovered a crack in my clean out which I had him repair to prevent worse issues down the road. I highly recommend A1 for sewer and drain issues." },
-  dennis: { name: "Dennis H.", date: "August 2026", text: "First time using A1 and I can’t say enough positive. Andy came within the hour that I called to unclog a basement floor drain. He was very thorough and checked to make sure the blockage was not coming from more than one area. He cleaned it out in a short time, got things moving and had good suggestions to help minimize future problems. Reasonable charges for good work and an honest pleasant person. Highly recommended." },
-  howard: { name: "Howard", date: "July 2026", text: "Our basement was flooded due to our sump pump being overwhelmed and the basement drain backing up as well after the heavy rains of June 17-18. We discovered it the afternoon of June 19. Andy worked us into his schedule for Sat. June 20. He was very quick, effcient, and effective at clearing the basement drain. My wife was impressed with his professionalism and customer courtesy. I highly recommend A1 Sewer." },
-  joshua: { name: "Joshua N.", date: "", text: "10 Stars if I could. Coming from someone who builds systems and processes for a 9 figure company, Andy does it all right and keeps it simple. Easy to find in search, stands out in reviews, easy to see why. Answered the phone 8am first try, flexible to when I needed, arrived within hours of first contact. Followups easy in text. Got pertinent info, walked the house, got to work, fixed it and another issue after quick run to store for parts. More than reasonable price. In my phone for next time if I ever need it! Thanks Andy!" },
-  noah: { name: "Noah H.", date: "March 2026", text: "Fantastic service! Called, told him the bottom of my water heater is leaking, sent him pics of everything and he was out the next day replacing it at a reasonable price! Highly recommend 👌 Thank you!" },
-  eugene: { name: "Eugene", date: "October 2025", text: "Andy did a great job. Removing a two bowl undermount sink from granite countertop, replacing the sink with a single bowl, new faucet and disposal. Not something everyone does. Andy was pn time, communicated well, very detail-oriented, and trustworthy. Estimate was on target as well. Highly recommend." },
-};
-
 export default {
   domain: "draincleaningnorthliberty.com",
   origin: "https://draincleaningnorthliberty.com",
@@ -20,7 +11,7 @@ export default {
   compareCity: "North Liberty",
   web3formsKey: "42264181-3add-41d6-b7d6-ca8e2e279ed3",
   topbar: "Drain &amp; sewer cleaning in North Liberty &middot; Open 24/7",
-  footerBlurb: "Drain Cleaning Pro's of North Liberty clears floor drains, main lines, sinks and tubs for homes, townhomes and businesses across North Liberty. Jobs are completed by A1 Sewer Service, a locally owned crew based in Iowa City.",
+  footerBlurb: "Drain Cleaning Pro's of North Liberty clears floor drains, main lines, sinks and tubs for homes, townhomes and businesses across North Liberty. Our local crew is based just down the road in Iowa City.",
   footerArea: "Serving North Liberty, Coralville, Iowa City, Tiffin &amp; the Corridor",
   footerBottom: "Proudly serving North Liberty, from Penn Street to North Kansas Avenue.",
   formPlaceholder: "Example: Floor drain in our finished basement backed up after the washer ran...",
@@ -35,15 +26,13 @@ export default {
     short: "Drain Cleaning Pro's",
     cityLine: "of North Liberty",
     years: "8+",
-    // The crew that completes the jobs. Reviews and photos on the site are theirs and are credited to them.
-    crew: { name: "A1 Sewer Service", rating: "5.0", reviewCount: "40+" },
   },
 
   images: {
     hero: { file: "hero-drain-cleaning.webp", alt: "Technician running a drain cable into a backed-up basement floor drain" },
     videoThumb: { file: "drain-cleaning-cost-video.webp", alt: "Drain Cleaning Cost in Iowa City (2026) video" },
-    truck: { file: "drain-cleaning-truck-and-equipment.webp", alt: "A1 Sewer Service truck with a drain machine and hose reel set out on a driveway", caption: "Drain machines unloaded and ready to work" },
-    truckSide: { file: "a1-sewer-service-truck.webp", alt: "White A1 Sewer Service pickup truck with drain cleaning lettering", caption: "The A1 Sewer Service truck" },
+    truck: { file: "drain-cleaning-truck-and-equipment.webp", alt: "Work truck with a drain machine and hose reel set out on a driveway", caption: "Drain machines unloaded and ready to work" },
+    truckSide: { file: "drain-cleaning-work-truck.webp", alt: "White drain cleaning work truck parked on a residential street", caption: "Our drain cleaning truck on a call" },
     floorDrain: { file: "basement-floor-drain-snaking.webp", alt: "Drain cable fed into an open basement floor drain", caption: "Running a cable into a backed-up basement floor drain" },
     roots: { file: "roots-cleared-from-floor-drain.webp", alt: "Roots and debris removed from a basement floor drain line", caption: "Roots and debris cleared from a floor drain line" },
     sinkBefore: { file: "kitchen-sink-before.webp", alt: "Double-bowl kitchen sink before replacement", caption: "Before: old double-bowl sink" },
@@ -229,7 +218,7 @@ export default {
       eyebrow: "About Drain Cleaning Pro's",
       h2: "Dedicated To Keeping North Liberty Drains Flowing, With Honest Prices Up Front",
       paras: [
-        "Drain Cleaning Pro's of North Liberty clears drains for homes, townhomes and businesses all over town, from the subdivisions around Penn Street to the townhomes along North Kansas Avenue. The work is done by A1 Sewer Service, a locally owned crew run by owner Andy from a shop on the south side of Iowa City, about 20 minutes away.",
+        "Drain Cleaning Pro's of North Liberty clears drains for homes, townhomes and businesses all over town, from the subdivisions around Penn Street to the townhomes along North Kansas Avenue. Our local, owner-run crew works from a shop on the south side of Iowa City, about 20 minutes away.",
         "North Liberty has grown fast, and plenty of our calls here are on houses only a few years old. Brand new or decades old, you'll get a straight answer about what's wrong and the price before we start.",
       ],
       points: ["Open 24 hours, 7 days a week", "Free, upfront estimates", "No after-hours fees until 8 p.m.", "Discounts for teachers, seniors &amp; military"],
@@ -258,10 +247,8 @@ export default {
         { h3: "Prove the Flow", p: "We run water to confirm full flow and share tips to keep it clear." },
       ],
     },
-    galleryHead: { eyebrow: "Our Work", h2: "See Our Drain &amp; Sewer Work", p: "Real photos from recent jobs around North Liberty, Iowa City and the Corridor, completed by our crew at A1 Sewer Service." },
+    galleryHead: { eyebrow: "Our Work", h2: "See Our Drain &amp; Sewer Work", p: "Real photos from recent jobs around North Liberty, Iowa City and the Corridor." },
     gallery: ["excavator", "floorDrain", "sumpPit", "trench", "truck", "dischargeLine"],
-    reviewsHead: { eyebrow: "Testimonials", h2: "Trusted By Homeowners Across North Liberty &amp; the Corridor" },
-    reviews: [REVIEWS.dennis, REVIEWS.howard, REVIEWS.nic, REVIEWS.eugene, REVIEWS.joshua, REVIEWS.noah],
     ba: {
       eyebrow: "Before / After",
       h2: "See The Difference A Drain Cleaning Can Make",
@@ -278,9 +265,9 @@ export default {
     eyebrow: "Who We Are",
     h2: "Your Local North Liberty Drain Cleaning Specialists",
     paras: [
-      "Drain Cleaning Pro's of North Liberty exists to get North Liberty drains running again, with the price agreed before any work starts. Jobs are handled by A1 Sewer Service, a small, owner-operated crew. Andy, the owner, has more than eight years in the drain and sewer trade and still runs calls himself. The crew's shop sits on the south side of Iowa City, about 20 minutes from North Liberty, so help is close whether your floor drain backs up at noon or at midnight.",
-      "The way Andy sees it, someone with a backed-up basement deserves a real person who explains the problem, gives a price before starting and treats the home with respect. That's what customers keep pointing to in their reviews: a quick response, careful work and a fair price.",
-      "Along with drain and sewer cleaning, the crew installs sump pumps, run buried downspout and discharge lines, and handle fixture and water heater work for North Liberty, Coralville, Iowa City, Tiffin and the rest of the Corridor.",
+      "Drain Cleaning Pro's of North Liberty exists to get North Liberty drains running again, with the price agreed before any work starts. Our small, owner-operated crew has more than eight years in the drain and sewer trade and works from a shop on the south side of Iowa City, about 20 minutes from North Liberty, so help is close whether your floor drain backs up at noon or at midnight.",
+      "The way we see it, someone with a backed-up basement deserves a real person who explains the problem, gives a price before starting and treats the home with respect. A quick response, careful work and a fair price.",
+      "Along with drain and sewer cleaning, our crew installs sump pumps, runs buried downspout and discharge lines, and handles fixture and water heater work for North Liberty, Coralville, Iowa City, Tiffin and the rest of the Corridor.",
     ],
     points: ["Local, owner-operated crew", "8+ years in the drain &amp; sewer trade", "Open 24/7, weekends included", "Discounts for teachers, seniors, military &amp; law enforcement"],
     img: "truck",
@@ -328,7 +315,7 @@ export default {
 
   gallery: {
     title: "Drain & Sewer Work Gallery | North Liberty | Drain Cleaning Pro's of North Liberty",
-    description: "Real photos of drain cleaning, sump pump, drain line and sewer jobs around North Liberty, Iowa City and the Corridor, completed by our crew at A1 Sewer Service.",
+    description: "Real photos of drain cleaning, sump pump, drain line and sewer jobs completed by our crew around North Liberty, Iowa City and the Corridor.",
     h1: "Our Drain &amp; Sewer Work Near North Liberty",
     head: { eyebrow: "Recent Jobs", h2: "See Our Drain &amp; Sewer Work", p: "Real photos from our crew's jobs around North Liberty, Iowa City and the Corridor. No stock photos." },
     items: ["excavator", "floorDrain", "roots", "sumpPit", "truck", "sumpDig", "dischargeLine", "downspout2", "downspout", "excavator2", "swisher", "trench", "sinkWide", "disposal", "parkLine"],
@@ -431,7 +418,5 @@ export default {
       "We're open 24/7 and about 20 minutes from North Liberty, with no after-hours fees until 8 p.m., weekends included.",
     ],
     formP: "Send this and we'll get back to you quickly.",
-    reviewsH2: "What North Liberty-Area Customers Say",
-    reviews: [REVIEWS.howard, REVIEWS.nic, REVIEWS.dennis],
   },
 };
