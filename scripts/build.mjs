@@ -83,6 +83,7 @@ const ICONS = {
   moon: '<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>',
   heart: '<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>',
   clipboard: '<rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/>',
+  phone: '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>',
   home: '<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-6h6v6"/>',
   building: '<rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M12 6h.01M16 6h.01M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01"/>',
   layers: '<path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/>',
@@ -130,6 +131,9 @@ const L = {
   addOnsEyebrow: "Add-Ons",
   faqEyebrow: "FAQ",
   contactEyebrow: "Free Estimates",
+  callBtn: "Call Now",
+  callPrompt: "Prefer to talk? Give us a call.",
+  mobileQuote: "Free Quote",
   contactInfo: [
     ["clock", "Hours", "Open 24 hours, 7 days a week"],
     ["moon", "After-hours fees", "None until 8 p.m., weekends included"],
@@ -139,6 +143,21 @@ const L = {
   ],
   ...(site.labels || {}),
 };
+
+// ---------- Call Now ----------
+// The phone number is never written into the site. site.callCode holds it scrambled
+// (make one with `node scripts/encode-phone.mjs "(319) 555-0123"`); main.js unscrambles it
+// only when someone taps a Call button. No callCode = no Call buttons.
+const CALL = site.callCode || "";
+const callBtn = (cls = "btn btn--call", spot = "page") =>
+  CALL ? `<a href="#call" class="${cls}" data-call="${spot}" rel="nofollow">${icon("phone")}<span>${L.callBtn}</span></a>` : "";
+
+// ---------- Umami analytics (optional) ----------
+// Set site.umami = { websiteId: "...", src: "https://.../script.js" } to load Umami. main.js then reports
+// "Call Now" taps (with where on the page they happened) and "Quote form sent" as Umami events.
+const UMAMI = site.umami && site.umami.websiteId
+  ? `\n  <script defer src="${site.umami.src || "https://cloud.umami.is/script.js"}" data-website-id="${site.umami.websiteId}" data-domains="${site.domain}"></script>`
+  : "";
 
 // ---------- URLs ----------
 const PRICING = "/" + site.pricing.slug;
@@ -228,6 +247,7 @@ function header(active) {
       ${brandMark()}
       ${nav(active)}
       <div class="header-cta">
+        ${callBtn("btn btn--call btn--sm", "header")}
         ${arrowBtn("/contact", "Free Estimate", "btn btn--primary btn--sm")}
         <button class="nav-toggle" aria-label="Open menu" aria-controls="site-nav" aria-expanded="false">${icon("menu")}</button>
       </div>
@@ -319,10 +339,10 @@ function layout({ path: p, title, description, body, schema = [], noindex = fals
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/styles.css?v=${CSS_V}">${THEME_CSS}${preload ? `\n  <link rel="preload" as="image" href="${preload}" fetchpriority="high">` : ""}
+  <link rel="stylesheet" href="/css/styles.css?v=${CSS_V}">${THEME_CSS}${UMAMI}${preload ? `\n  <link rel="preload" as="image" href="${preload}" fetchpriority="high">` : ""}
   ${ld}
 </head>
-<body>
+<body${CALL ? ` data-c="${CALL}"` : ""}>
   <a class="skip" href="#main">Skip to content</a>
   ${header(p === "/" ? "/" : p)}
 
@@ -331,7 +351,9 @@ ${body}
   </main>
 
   ${footer()}
-
+${CALL ? `
+  <div class="mobile-bar" id="call">${callBtn("mb-call", "mobile-bar")}<a href="/contact" class="mb-quote">${icon("mail")}<span>${L.mobileQuote}</span></a></div>
+` : ""}
   ${lightbox}
 
   <script src="/js/main.js?v=${JS_V}" defer></script>
@@ -359,7 +381,7 @@ const pageHero = (h1, crumbs, lead) => `  <section class="page-hero">
   </section>`;
 
 const ctaStrip = ({ h2, p, btn = L.estimateBtn }, padTop = false) => `  <section class="section"${padTop ? ' style="padding-top:0"' : ""}>
-    <div class="container"><div class="cta-strip reveal"><div><h2>${h2}</h2><p>${p}</p></div>${arrowBtn("/contact", btn, "btn btn--light")}</div></div>
+    <div class="container"><div class="cta-strip reveal"><div><h2>${h2}</h2><p>${p}</p></div><div class="cta-actions">${arrowBtn("/contact", btn, "btn btn--light")}${callBtn("btn btn--ghost-light", "cta-banner")}</div></div></div>
   </section>`;
 
 const ticks = (items, ic = "check") => `<ul class="ticks">
@@ -469,6 +491,7 @@ const pages = [];
         <p class="lead">${h.lead}</p>
         <div class="hero-cta">
           ${arrowBtn("/contact", L.estimateBtn)}
+          ${callBtn("btn btn--ghost-light", "hero")}
           <a href="${PRICING}" class="btn btn--ghost-light">${L.heroPricesBtn}</a>
         </div>
         <div class="hero-trust">
@@ -905,6 +928,7 @@ ${ctaStrip(pg.cta)}`;
         <ul class="info-list">
           ${L.contactInfo.map(([ic, t, v]) => `<li>${icon(ic)}<div><b>${t}</b><span>${v.replace("{areas}", site.areas.join(", "))}</span></div></li>`).join("\n          ")}
         </ul>
+        ${CALL ? `<div class="contact-call" data-call-wrap><p>${L.callPrompt}</p>${callBtn("btn btn--call", "contact-page")}</div>` : ""}
       </div>
       ${form(`New drain cleaning request — ${site.domain} (Contact page)`, { idPrefix: "contact", head: { h2: L.contactFormH2, p: c.formP } })}
     </div>

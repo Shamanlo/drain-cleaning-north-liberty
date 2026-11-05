@@ -37,6 +37,31 @@
     items.forEach(function (el) { el.classList.add("in"); });
   }
 
+  // Umami events (no-op when Umami isn't loaded)
+  var track = function (name, data) {
+    try { if (window.umami && typeof window.umami.track === "function") window.umami.track(name, data); } catch (e) {}
+  };
+
+  // Call Now: the number sits scrambled in <body data-c> and is only turned into a tel: link
+  // at the moment a Call button is tapped, so it never appears in the page source or the DOM.
+  // CALL_KEY must match scripts/encode-phone.mjs.
+  var callCode = document.body.getAttribute("data-c");
+  if (callCode) {
+    var CALL_KEY = "dcp-tel-26";
+    var callNumber = function () {
+      var raw = atob(callCode.split("").reverse().join("")), out = "";
+      for (var i = 0; i < raw.length; i++) out += String.fromCharCode(raw.charCodeAt(i) ^ CALL_KEY.charCodeAt(i % CALL_KEY.length));
+      return out;
+    };
+    document.querySelectorAll("[data-call]").forEach(function (a) {
+      a.addEventListener("click", function () {
+        a.setAttribute("href", "tel:" + callNumber());
+        track("Call Now", { spot: a.getAttribute("data-call"), page: window.location.pathname });
+        setTimeout(function () { a.setAttribute("href", "#call"); }, 1500);
+      });
+    });
+  }
+
   // Year
   document.querySelectorAll("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
 
@@ -123,6 +148,7 @@
           if (res.ok && res.body.success) {
             status.className = "form-status ok";
             status.textContent = "Thanks! Your request was sent. We'll reach out shortly with an upfront price.";
+            track("Quote form sent", { page: window.location.pathname, service: data.service || "" });
             form.reset();
           } else {
             throw new Error(res.body && res.body.message);

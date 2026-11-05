@@ -31,7 +31,11 @@ Everything (copy, prices, reviews, image alt text, FAQs) lives in `site.config.m
 - **Video upload date**: set `video.uploadDate` (e.g. `"2026-10-30"`) so Google can show the video rich result.
 - **Reviews** are verbatim Google reviews of A1 Sewer Service LLC.
 - **Form** posts to Web3Forms using the access key in `web3formsKey`. Submissions go to the email on that key.
-- **No phone number** appears on the site by design. Truck photos had the number removed.
+- **No phone number** is displayed anywhere. The Call Now buttons dial the number stored scrambled in
+  `callCode`; it only becomes a `tel:` link at the moment someone taps. To change it, run
+  `node scripts/encode-phone.mjs "(319) 555-0123"` and paste the output into `callCode`. Remove `callCode` to hide the buttons.
+- **Umami (optional):** set `umami: { websiteId: "...", src: "https://.../script.js" }` in `site.config.mjs`.
+  The site then sends "Call Now" (with `spot` and `page`) and "Quote form sent" events.
 
 ## Build
 

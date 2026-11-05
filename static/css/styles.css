@@ -63,6 +63,14 @@ ul { margin: 0; padding: 0; list-style: none; }
 .btn--light { background: #fff; color: var(--navy); }
 .btn--light:hover { background: var(--orange); color: #fff; }
 .btn--sm { padding: 11px 18px; font-size: 15px; }
+.btn--call { background: var(--teal); color: #fff; box-shadow: 0 8px 22px rgba(var(--teal-rgb), 0.28); }
+.btn--call:hover { background: var(--navy); color: #fff; }
+.btn[data-call]:hover .ico-svg { transform: none; }
+html:not(.js) [data-call], html:not(.js) [data-call-wrap], html:not(.js) .mobile-bar { display: none !important; }
+.cta-actions { display: flex; gap: 12px; flex-wrap: wrap; flex: none; }
+.contact-call { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 28px; padding: 18px 20px; background: var(--alt); border-radius: var(--radius); }
+.contact-call p { margin: 0; font-weight: 700; color: var(--ink); }
+.mobile-bar { display: none; }
 .btn--block { width: 100%; justify-content: center; }
 .center-btn { text-align: center; margin-top: 42px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
@@ -402,6 +410,16 @@ ul { margin: 0; padding: 0; list-style: none; }
   .brand-name { font-size: 21px; }
   .brand-name small { font-size: 10.5px; letter-spacing: 1.2px; }
   .header-cta .btn { display: none; }
+  .header-cta .btn--call { display: inline-flex; width: 46px; height: 46px; padding: 0; justify-content: center; border-radius: 10px; box-shadow: none; }
+  .header-cta .btn--call span { display: none; }
+  .header-cta .btn--call .ico-svg { width: 21px; height: 21px; }
+  .mobile-bar { display: grid; grid-template-columns: 1fr 1fr; position: fixed; left: 0; right: 0; bottom: 0; z-index: 45; box-shadow: 0 -6px 24px rgba(var(--navy-rgb), 0.18); }
+  .mobile-bar a { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 15px 10px calc(15px + env(safe-area-inset-bottom)); font-weight: 700; font-size: 16px; color: #fff; }
+  .mobile-bar .ico-svg { width: 19px; height: 19px; }
+  .mb-call { background: var(--teal); }
+  .mb-quote { background: var(--orange); }
+  .nav-open .mobile-bar { display: none; }
+  body[data-c] { padding-bottom: 58px; }
   .cards, .cards--3, .steps, .ba-grid, .f-grid { grid-template-columns: 1fr; }
   .contact-form { padding: 22px 18px; }
   .contact-form .row { grid-template-columns: 1fr; gap: 0; }

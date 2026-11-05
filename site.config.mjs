@@ -10,6 +10,9 @@ export default {
   state: "IA",
   compareCity: "North Liberty",
   web3formsKey: "42264181-3add-41d6-b7d6-ca8e2e279ed3",
+  // Call Now buttons dial this number. It's stored scrambled so the digits never appear in the repo or on the site.
+  // To change it: node scripts/encode-phone.mjs "(319) 555-0123" and paste the output here.
+  callCode: "XZFBG0BXT1EHDJ1T",
   topbar: "Drain &amp; sewer cleaning in North Liberty &middot; Open 24/7",
   footerBlurb: "Drain Cleaning Pro's of North Liberty clears floor drains, main lines, sinks and tubs for homes, townhomes and businesses across North Liberty. Our local crew is based just down the road in Iowa City.",
   footerArea: "Serving North Liberty, Coralville, Iowa City, Tiffin &amp; the Corridor",
@@ -67,6 +70,8 @@ export default {
     addOnsEyebrow: "Extras",
     faqEyebrow: "Common Questions",
     contactEyebrow: "Free Quotes",
+    callPrompt: "Rather talk it through? Tap to call us.",
+    mobileQuote: "Get a Quote",
     contactInfo: [
       ["clock", "Available", "24 hours a day, every day of the week"],
       ["moon", "Evenings &amp; weekends", "No extra charge before 8 p.m."],
