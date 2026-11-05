@@ -92,8 +92,7 @@ export default {
   images: {
     hero: { file: "hero-drain-cleaning.webp", alt: "Technician running a drain cable into a backed-up basement floor drain" },
     videoThumb: { file: "drain-cleaning-cost-video.webp", alt: "Drain Cleaning Cost in Iowa City (2026) video" },
-    truck: { file: "drain-cleaning-truck-and-equipment.webp", alt: "Work truck with a drain machine and hose reel set out on a driveway", caption: "Drain machines unloaded and ready to work" },
-    truckSide: { file: "drain-cleaning-work-truck.webp", alt: "White drain cleaning work truck parked on a residential street", caption: "Our drain cleaning truck on a call" },
+    truck: { file: "drain-cleaning-truck-and-equipment.webp", alt: "Drain machine and hose reel set out behind a work truck on a driveway", caption: "Drain machines unloaded and ready to work" },
     floorDrain: { file: "basement-floor-drain-snaking.webp", alt: "Drain cable fed into an open basement floor drain", caption: "Running a cable into a backed-up basement floor drain" },
     roots: { file: "roots-cleared-from-floor-drain.webp", alt: "Roots and debris removed from a basement floor drain line", caption: "Roots and debris cleared from a floor drain line" },
     sinkBefore: { file: "kitchen-sink-before.webp", alt: "Double-bowl kitchen sink before replacement", caption: "Before: old double-bowl sink" },
@@ -106,8 +105,6 @@ export default {
     excavator: { file: "mini-excavator-sewer-dig.webp", alt: "Mini excavator digging to reach a buried drain line", caption: "Excavating to reach a buried line" },
     excavator2: { file: "mini-excavator-drain-line.webp", alt: "Crew trenching with a mini excavator for a new drain line", caption: "Trenching for a new drain line" },
     downspout: { file: "downspout-drain-line-trench.webp", alt: "Long trench with a new buried downspout drain line", caption: "Buried downspout drain line" },
-    downspout2: { file: "downspout-line-to-foundation.webp", alt: "Technician connecting a new drain line next to a brick foundation", caption: "Connecting a drain line at the foundation" },
-    trench: { file: "drain-line-trench.webp", alt: "Drain line trench running down a sloped yard", caption: "Drain line on a sloped lot" },
     parkLine: { file: "buried-drain-line.webp", alt: "New drain pipe laid in an open trench across a yard", caption: "New drain pipe in the trench" },
     swisher: { file: "exposed-sewer-pipe-swisher.webp", alt: "Exposed sewer pipes in a trench in Swisher, Iowa, near North Liberty", caption: "Exposed sewer pipes in Swisher, near North Liberty" },
     dischargeLine: { file: "sump-pump-discharge-line.webp", alt: "Sump pump discharge line being buried across a front lawn", caption: "Burying a sump discharge line away from the house" },
@@ -283,7 +280,7 @@ export default {
         "This is a fast-growing town, so many of the houses we visit are only a few years old. New or not, every visit starts the same way: we find what's wrong, tell you the price, and only then pick up the tools.",
       ],
       points: ["Answering 24/7, every day", "Quotes are free and upfront", "$0 after-hours fee before 8 p.m.", "Teacher, senior &amp; military discounts"],
-      img: "truckSide",
+      img: "excavator2",
     },
     featuredServices: ["floor-drain-cleaning", "main-sewer-line-cleaning", "kitchen-bathroom-drains", "sewer-camera-inspection"],
     servicesHead: { eyebrow: "What We Clear", h2: "Drain Cleaning Services for North Liberty Homes", p: "A sluggish shower drain or a floor drain overflowing into a finished basement: we clear it and show you what caused it." },
@@ -309,7 +306,7 @@ export default {
       ],
     },
     galleryHead: { eyebrow: "Recent Jobs", h2: "Drain &amp; Sewer Jobs We've Completed", p: "Real job photos from around North Liberty, Iowa City and the Corridor." },
-    gallery: ["excavator", "floorDrain", "sumpPit", "trench", "truck", "dischargeLine"],
+    gallery: ["excavator", "floorDrain", "sumpPit", "swisher", "truck", "dischargeLine"],
     ba: {
       eyebrow: "Before / After",
       h2: "What a Professional Drain Cleaning Changes",
@@ -360,7 +357,7 @@ export default {
     description: "North Liberty drain cleaning services: main sewer lines, hydro jetting, sewer camera inspections, floor drains, sinks, tubs and toilets. Open 24/7, free quotes.",
     h1: "Drain Cleaning Services in North Liberty",
     head: { eyebrow: "Our Services", h2: "Complete Drain &amp; Sewer Cleaning for North Liberty Homes", p: "From a single slow sink to a full sewer backup, we clear it, tell you why it happened and price it before we start." },
-    extra: { name: "24/7 Emergency Drain Cleaning", icon: "siren", img: "truckSide", short: "Water rising through a finished basement floor after dark? We're available 24/7, and there's no after-hours fee before 8 p.m." },
+    extra: { name: "24/7 Emergency Drain Cleaning", icon: "siren", img: "sumpDig", short: "Water rising through a finished basement floor after dark? We're available 24/7, and there's no after-hours fee before 8 p.m." },
     process: {
       eyebrow: "How a Visit Works",
       h2: "An Easy, No-Surprise Service Call",
@@ -379,7 +376,7 @@ export default {
     description: "See real photos from drain cleaning, sump pump, sewer and drain line jobs our crew has completed around North Liberty, Iowa City and the Corridor.",
     h1: "Our Drain &amp; Sewer Work Near North Liberty",
     head: { eyebrow: "Job Photos", h2: "Drain &amp; Sewer Projects From Our Crew", p: "Every photo here comes from a real job around North Liberty, Iowa City and the Corridor." },
-    items: ["excavator", "floorDrain", "roots", "sumpPit", "truck", "sumpDig", "dischargeLine", "downspout2", "downspout", "excavator2", "swisher", "trench", "sinkWide", "disposal", "parkLine"],
+    items: ["excavator", "floorDrain", "roots", "sumpPit", "truck", "sumpDig", "dischargeLine", "downspout", "excavator2", "swisher", "sinkWide", "disposal", "parkLine"],
     ba: {
       eyebrow: "Before / After",
       h2: "Before and After a Drain Cleaning",
@@ -427,7 +424,7 @@ export default {
         "Backups don't keep business hours. Someone is available 24 hours a day, and calls before <b>8 p.m. carry no after-hours fee</b>, on weekends too. A Sunday afternoon backup in North Liberty is priced like any weekday call.",
         "Later than 8 p.m., an after-hours rate may apply, and you'll know the amount before we leave for your place.",
       ],
-      img: "truckSide",
+      img: "sumpDig",
     },
     factors: {
       eyebrow: "What Affects Price",
