@@ -147,7 +147,7 @@
         .then(function (res) {
           if (res.ok && res.body.success) {
             status.className = "form-status ok";
-            status.textContent = "Thanks! Your request was sent. We'll reach out shortly with an upfront price.";
+            status.textContent = "Thanks! Your request was sent. We'll get back to you in minutes.";
             track("Quote form sent", { page: window.location.pathname, service: data.service || "" });
             form.reset();
           } else {

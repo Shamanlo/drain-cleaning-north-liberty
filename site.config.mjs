@@ -40,7 +40,7 @@ export default {
     contactFormH2: "Get Your Free Quote",
     cardLink: "Read More",
     featuredLink: "See Details",
-    emergencyLink: "Send a Request",
+    emergencyLink: "Call Right Now",
     heroPricesBtn: "View North Liberty Pricing",
     expBadge: "Years Clearing<br>Corridor Drains",
     expBadgeAbout: "Years on<br>the Job",
@@ -69,7 +69,18 @@ export default {
     afterFee: "Extra Charge",
     addOnsEyebrow: "Extras",
     faqEyebrow: "Common Questions",
-    contactEyebrow: "Free Quotes",
+    contactEyebrow: "Call Us Now",
+    callCardBadge: "Answering 24/7",
+    callCardH2: "Speak With a Drain Pro Now",
+    callCardP: "Tell us what's backing up and get a straight price before we start.",
+    callCardPoints: ["$0 after-hours fee before 8 p.m.", "Price agreed before any work", "Quotes are always free"],
+    altRequest: "Rather not call? Send a request below and we'll get back to you in minutes.",
+    requestLink: "Or send us a request",
+    tierCall: "Call About This Job",
+    quoteEyebrow: "Talk to Us Now",
+    quotePoints: ["Answering 24/7, every day", "$0 extra before 8 p.m., weekends too", "Your price confirmed before we start"],
+    formTitle: "Rather Type It Out? Send a Request",
+    formLead: "Send the details and we'll get back to you in minutes.",
     callPrompt: "Rather talk it through? Tap to call us.",
     mobileQuote: "Get a Quote",
     contactInfo: [
@@ -163,10 +174,9 @@ export default {
       offer: ["Main line clearing from an interior or exterior cleanout", "Removal of construction debris, wipes and grease", "Root cutting in older lines", "Full-flow water test before we leave", "Camera inspection for repeat clogs", "Free, upfront estimate"],
       signsTitle: "Main Line Warning Signs",
       signs: ["The floor drain backs up when the washer drains", "Toilets gurgle when other fixtures run", "Two or more drains slow down at once", "Sewage smell from the floor drain", "Water rising in the shower when the toilet flushes"],
-      btn: "Get A Main Line Quote",
       priceTitle: "What Main Lines Cost",
       priceNote: "Clogs are cleared from $120, and a typical snaking is around $250. Main sewer lines get a free quote before any work begins.",
-      cta: { h2: "Clear Your North Liberty Main Line", p: "Open 24/7, with no after-hours fees until 8 p.m.", btn: "Request Service" },
+      cta: { h2: "Clear Your North Liberty Main Line", p: "Open 24/7, with no after-hours fees until 8 p.m." },
     },
     {
       slug: "hydro-jetting",
@@ -186,10 +196,9 @@ export default {
       offer: ["Kitchen, laundry and main line jetting", "Grease, soap scum and sludge removal", "Flushing fine roots after root cutting", "Recurring maintenance for restaurants", "Optional camera check before and after", "Price confirmed before we start"],
       signsTitle: "Good Candidates for Jetting",
       signs: ["A drain that's been cleared more than once this year", "Kitchen lines that slow down weeks after cleaning", "Heavy grease coating seen on camera", "Restaurant lines between grease trap services", "Townhome lines shared by several units"],
-      btn: "Get A Jetting Quote",
       priceTitle: "What Jetting Costs",
       priceNote: "Hydro jetting depends on how long the line is and how we reach it, so it gets a free quote first. Standard clog clearing starts at $120.",
-      cta: { h2: "Break the Cycle of Repeat Clogs", p: "Find out if hydro jetting is right for your North Liberty line.", btn: "Ask About Jetting" },
+      cta: { h2: "Break the Cycle of Repeat Clogs", p: "Find out if hydro jetting is right for your North Liberty line." },
     },
     {
       slug: "sewer-camera-inspection",
@@ -209,10 +218,9 @@ export default {
       offer: ["Live video inspection through the cleanout", "Debris, sag, root and joint problem identification", "Above-ground locating with depth marking", "Sewer scopes for home buyers", "Before-and-after checks for jetting", "A clear explanation of what we found"],
       signsTitle: "When to Book a Camera Inspection",
       signs: ["A drain that clogs again and again", "A newer home with main line backups", "You're under contract on a house", "You've been told the line has to be dug up", "You want confirmation a line is clean"],
-      btn: "Book A Camera Inspection",
       priceTitle: "What Inspections Cost",
       priceNote: "Every camera inspection gets a free quote first, and it can usually be added to a drain cleaning visit.",
-      cta: { h2: "See Inside Your Sewer Line", p: "Book a camera inspection anywhere in North Liberty.", btn: "Book An Inspection" },
+      cta: { h2: "See Inside Your Sewer Line", p: "Book a camera inspection anywhere in North Liberty." },
     },
     {
       slug: "floor-drain-cleaning",
@@ -232,10 +240,9 @@ export default {
       offer: ["Basement floor drain clearing", "Branch line and main line checks", "Cleanout repair", "Sump pump installation and replacement", "Buried downspout and discharge lines", "After-hours and weekend service"],
       signsTitle: "Floor Drain Trouble Signs",
       signs: ["Water around the drain after laundry", "Backups during heavy rain", "Gurgling when toilets flush", "Sewer smell in a finished basement", "Slow-draining standing water"],
-      btn: "Get Your Floor Drain Cleared",
       priceTitle: "What Floor Drains Cost",
       priceNote: "Clogs are cleared from $120, and a typical snaking is around $250. Your price is confirmed before we begin.",
-      cta: { h2: "Floor Drain Backing Up Right Now?", p: "We're open 24/7. Send a request and we'll get right back to you.", btn: "Request Service Now" },
+      cta: { h2: "Floor Drain Backing Up Right Now?", p: "Someone is answering 24/7. Call now and get help right away." },
     },
     {
       slug: "kitchen-bathroom-drains",
@@ -255,10 +262,9 @@ export default {
       offer: ["Kitchen sink and disposal drain cleaning", "Tub, shower and vanity drains", "Toilet clogs", "Laundry and utility sink lines", "Disposal, faucet and fixture repair", "Townhome and rental service"],
       signsTitle: "When to Call Instead of Plunging Again",
       signs: ["The sink slows down again within days", "Water backs into the second sink bowl", "Standing water in the tub during showers", "Gurgling when appliances drain", "An odor coming from the drain"],
-      btn: "Get A Drain Cleared",
       priceTitle: "What Sinks & Tubs Cost",
       priceNote: "Clearing a sink, tub or shower starts at $120, a typical snaking is around $250, and you'll know the price first.",
-      cta: { h2: "Get Your North Liberty Drains Running Again", p: "Free estimates, with no after-hours fees until 8 p.m.", btn: "Get My Free Estimate" },
+      cta: { h2: "Get Your North Liberty Drains Running Again", p: "Free estimates, with no after-hours fees until 8 p.m." },
     },
   ],
 
@@ -271,7 +277,6 @@ export default {
     lead: "When a floor drain backs up or the kitchen sink won't empty, our local, owner-run crew heads up from Iowa City to clear it. We're open 24/7, quote every job before we start, and never add an after-hours fee before 8 p.m.",
     trust: { strong: "Owner-Run Local Crew", span: "Roughly 20 minutes from North Liberty" },
     stats: [["8+", "Years on the Job"], ["$120", "Starting Price"], ["24/7", "Day &amp; Night Service"]],
-    formHead: { h2: "Request a Free Quote", p: "A few details is all we need. We'll reply fast with an upfront price." },
     about: {
       eyebrow: "Who We Are",
       h2: "Clearing North Liberty Drains With Straight Answers and Upfront Pricing",
@@ -299,7 +304,7 @@ export default {
       h2: "How Our Drain Cleaning Visits Work",
       p: "Four quick steps, from your first message to water running freely.",
       steps: [
-        { h3: "Tell Us About It", p: "Use the quote form day or night and describe which drains are acting up." },
+        { h3: "Give Us a Ring", p: "Call day or night and describe which drains are acting up." },
         { h3: "Approve the Price", p: "We work out what the job takes and give you the price before we begin." },
         { h3: "We Clear the Line", p: "The clog gets cleared from the best access point, right back to the main." },
         { h3: "Flow Check &amp; Tips", p: "We test the drain at full flow and explain how to keep it that way." },
@@ -313,7 +318,7 @@ export default {
       before: { img: "floorDrain", tag: "Before", cap: "A backed-up basement floor drain, opened and ready for the cable." },
       after: { img: "roots", tag: "After", cap: "The roots and debris that were choking the line." },
     },
-    cta: { h2: "Need a North Liberty Drain Cleared?", p: "Send a quick request for a free, upfront quote. We're open 24/7, with no after-hours fee before 8 p.m.", btn: "Request My Free Quote" },
+    cta: { h2: "Need a North Liberty Drain Cleared?", p: "Call now for a free, upfront quote. We're open 24/7, with no after-hours fee before 8 p.m." },
   },
 
   about: {
@@ -343,13 +348,13 @@ export default {
       eyebrow: "Step by Step",
       h2: "Our Drain Cleaning Process",
       steps: [
-        { h3: "Send a Request", p: "Use the form any time and tell us what's going on." },
+        { h3: "Call Any Time", p: "Ring us day or night and tell us what's going on." },
         { h3: "Pinpoint the Clog", p: "We find where the blockage is and price the job before starting." },
         { h3: "Clear It Out", p: "Cable, jetter or camera: we use what your line really needs." },
         { h3: "Check &amp; Explain", p: "We confirm full flow and walk you through what caused it." },
       ],
     },
-    cta: { h2: "Ready for North Liberty Drains That Just Work?", p: "Send us a request whenever it suits you. We're available day and night.", btn: "Request My Free Quote" },
+    cta: { h2: "Ready for North Liberty Drains That Just Work?", p: "Call whenever it suits you. Someone's available day and night." },
   },
 
   servicesPage: {
@@ -362,13 +367,13 @@ export default {
       eyebrow: "How a Visit Works",
       h2: "An Easy, No-Surprise Service Call",
       steps: [
-        { h3: "Describe the Problem", p: "Send the form. A photo or two of the drain helps." },
+        { h3: "Describe the Problem", p: "Call us, or send a request with a photo or two of the drain." },
         { h3: "Get Your Quote", p: "We confirm what's needed and give you the price first." },
         { h3: "Clear the Line", p: "Hand cable, drain machine or jetter, matched to your pipe." },
         { h3: "Test &amp; Walk Through", p: "We run water to prove the line is clear and show you what we found." },
       ],
     },
-    cta: { h2: "Can't Tell What's Causing the Clog?", p: "Describe what's happening and we'll recommend a fix, with a free quote up front.", btn: "Get a Recommendation" },
+    cta: { h2: "Can't Tell What's Causing the Clog?", p: "Call and describe what's happening. We'll recommend a fix, with a free quote up front." },
   },
 
   gallery: {
@@ -387,7 +392,7 @@ export default {
       before: { img: "sinkBefore", tag: "Before", cap: "A tired double-bowl sink that drained slowly." },
       after: { img: "sinkAfter", tag: "After", cap: "A new sink, faucet and disposal that drain freely." },
     },
-    cta: { h2: "Ready for Clear-Running Drains?", p: "Request a free, upfront quote for your North Liberty home.", btn: "Request My Free Quote" },
+    cta: { h2: "Ready for Clear-Running Drains?", p: "Call for a free, upfront quote for your North Liberty home." },
   },
 
   pricingPage: {
@@ -411,7 +416,7 @@ export default {
       h2: "Video: What It Costs to Snake a Drain Near North Liberty",
       paras: [
         "Our short 2026 video walks through drain cleaning prices for the Iowa City area, North Liberty included: clogs cleared from $120, and a typical drain snaking at around $250.",
-        "Give it a watch before you call around, then send us a request to confirm your exact price.",
+        "Give it a watch before you call around, then call us to confirm your exact price.",
       ],
     },
     tiersHead: { eyebrow: "Price Tiers", h2: "North Liberty Drain Cleaning Costs by Job", p: "Nearly every North Liberty call fits one of these three tiers, and your price is confirmed before we start." },
@@ -463,18 +468,18 @@ export default {
       { q: "Do quotes cost anything?", a: "No. Quotes are always free, given before any work starts, and come with no obligation." },
       { q: "Are discounts available?", a: "Yes. Teachers, seniors, and military and law enforcement get a community discount. Mention it in your request." },
     ],
-    cta: { h2: "Get Your Free North Liberty Drain Cleaning Quote", p: "Find out what your drain will cost before any work starts, free of charge.", btn: "Get My Quote" },
+    cta: { h2: "Get Your Free North Liberty Drain Cleaning Quote", p: "Find out what your drain will cost before any work starts, free of charge." },
   },
 
   contact: {
     title: "Contact | Drain Cleaning North Liberty | Drain Cleaning Pro's of North Liberty",
     description: "Get a free, upfront drain cleaning quote in North Liberty, IA from Drain Cleaning Pro's of North Liberty. Available 24/7, no after-hours fee before 8 p.m.",
     h1: "Contact Drain Cleaning Pro's of North Liberty",
-    h2: "Request a Free Drain Cleaning Quote in North Liberty",
+    h2: "Call for Drain Cleaning in North Liberty",
+    cta: { h2: "Got a Backed-Up Drain? Call Us", p: "Speak with a drain pro now, or send a request below and we'll get back to you in minutes." },
     paras: [
-      "Tell us which drains are slow or overflowing, plus anything you've tried already. We'll reply with what the job likely needs and a price up front.",
+      "Calling is the quickest way to get help. Tell us which drains are slow or overflowing, plus anything you've tried already, and we'll tell you what the job likely needs and the price up front.",
       "We're available around the clock, about 20 minutes away, and there's no after-hours fee before 8 p.m., even on weekends.",
     ],
-    formP: "Send it over and we'll reply quickly.",
   },
 };

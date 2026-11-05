@@ -30,7 +30,9 @@ Everything (copy, prices, reviews, image alt text, FAQs) lives in `site.config.m
   snaking about **$250**. Update `pricing.start`, `pricing.snake` and the tier/FAQ text together.
 - **Video upload date**: set `video.uploadDate` (e.g. `"2026-10-30"`) so Google can show the video rich result.
 - **Reviews** are verbatim Google reviews of A1 Sewer Service LLC.
-- **Form** posts to Web3Forms using the access key in `web3formsKey`. Submissions go to the email on that key.
+- **Call-first:** the main button on every page is Call Now. The request form lives in a section at the bottom of
+  every page (`#quote`, "we'll get back to you in minutes") and posts to Web3Forms using `web3formsKey`;
+  submissions go to the email on that key, with the page name in the subject.
 - **No phone number** is displayed anywhere. The Call Now buttons dial the number stored scrambled in
   `callCode`; it only becomes a `tel:` link at the moment someone taps. To change it, run
   `node scripts/encode-phone.mjs "(319) 555-0123"` and paste the output into `callCode`. Remove `callCode` to hide the buttons.

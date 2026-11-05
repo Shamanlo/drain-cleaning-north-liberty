@@ -102,7 +102,7 @@ const L = {
   contactFormH2: "Request Your Free Estimate",
   cardLink: "Learn More",
   featuredLink: "Get Started",
-  emergencyLink: "Request Service",
+  emergencyLink: "Call Now",
   heroPricesBtn: `See ${site.city} Prices`,
   expBadge: "Years Serving<br>Eastern Iowa",
   expBadgeAbout: "Years in<br>the Trade",
@@ -133,6 +133,17 @@ const L = {
   faqEyebrow: "FAQ",
   contactEyebrow: "Free Estimates",
   callBtn: "Call Now",
+  callCardBadge: "Open 24/7",
+  callCardH2: "Talk to a Drain Pro Now",
+  callCardP: "Call and tell us what's going on. You'll get an upfront price before any work starts.",
+  callCardPoints: ["No after-hours fees until 8 p.m.", "Upfront price before any work", "Free estimates, no obligation"],
+  altRequest: "Prefer to type? Send a request and we'll get back to you in minutes.",
+  requestLink: "Or send a request",
+  tierCall: "Call for This Price",
+  quoteEyebrow: "Call Now",
+  quotePoints: ["Open 24 hours, 7 days a week", "No after-hours fees until 8 p.m.", "Free, upfront price before any work"],
+  formTitle: "Prefer to Write? Send a Request",
+  formLead: "Fill this out and we'll get back to you in minutes.",
   callPrompt: "Prefer to talk? Give us a call.",
   mobileQuote: "Free Quote",
   contactInfo: [
@@ -150,8 +161,22 @@ const L = {
 // (make one with `node scripts/encode-phone.mjs "(319) 555-0123"`); main.js unscrambles it
 // only when someone taps a Call button. No callCode = no Call buttons.
 const CALL = site.callCode || "";
-const callBtn = (cls = "btn btn--call", spot = "page") =>
-  CALL ? `<a href="#call" class="${cls}" data-call="${spot}" rel="nofollow">${icon("phone")}<span>${L.callBtn}</span></a>` : "";
+const callBtn = (cls = "btn btn--call", spot = "page", label = L.callBtn) =>
+  CALL ? `<a href="#call" class="${cls}" data-call="${spot}" rel="nofollow">${icon("phone")}<span>${label}</span></a>` : "";
+// The site is call-first: the main button everywhere is Call Now (falls back to the request form if no number is set).
+const primaryCta = (spot, cls = "btn btn--primary", label = L.callBtn) => (CALL ? callBtn(cls, spot, label) : arrowBtn("#quote", L.estimateBtn, cls));
+const requestLink = () => `<a href="#quote" class="text-link">${L.requestLink} ${icon("down")}</a>`;
+const btnRow = (spot) => `<div class="btn-row">${primaryCta(spot)}${requestLink()}</div>`;
+const callCard = (spot) => `<div class="call-card reveal">
+        <span class="cc-badge">${icon("clock")}${L.callCardBadge}</span>
+        <h2>${L.callCardH2}</h2>
+        <p>${L.callCardP}</p>
+        ${primaryCta(spot, "btn btn--primary btn--lg btn--block")}
+        <ul class="cc-points">
+          ${L.callCardPoints.map((t) => `<li>${icon("check")}<span>${t}</span></li>`).join("\n          ")}
+        </ul>
+        <a href="#quote" class="cc-alt">${icon("mail")}<span>${L.altRequest}</span></a>
+      </div>`;
 
 // ---------- Umami analytics (optional) ----------
 // Set site.umami = { websiteId: "...", src: "https://.../script.js" } to load Umami. main.js then reports
@@ -249,8 +274,7 @@ function header(active) {
       ${brandMark()}
       ${nav(active)}
       <div class="header-cta">
-        ${callBtn("btn btn--call btn--sm", "header")}
-        ${arrowBtn("/contact", "Free Estimate", "btn btn--primary btn--sm")}
+        ${primaryCta("header", "btn btn--primary btn--sm")}
         <button class="nav-toggle" aria-label="Open menu" aria-controls="site-nav" aria-expanded="false">${icon("menu")}</button>
       </div>
     </div>
@@ -307,7 +331,7 @@ const lightbox = `<div class="lightbox" id="lightbox" aria-hidden="true" role="d
     <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next image">${icon("right")}</button>
   </div>`;
 
-function layout({ path: p, title, description, body, schema = [], noindex = false, preload, ogType = "website" }) {
+function layout({ path: p, title, description, body, schema = [], noindex = false, preload, ogType = "website", hasQuote = true }) {
   const canonical = abs(p);
   const ld = [businessLd, ...schema].map((o) => `<script type="application/ld+json">\n${JSON.stringify(o, null, 2)}\n</script>`).join("\n  ");
   return `<!DOCTYPE html>
@@ -354,7 +378,7 @@ ${body}
 
   ${footer()}
 ${CALL ? `
-  <div class="mobile-bar" id="call">${callBtn("mb-call", "mobile-bar")}<a href="/contact" class="mb-quote">${icon("mail")}<span>${L.mobileQuote}</span></a></div>
+  <div class="mobile-bar" id="call">${callBtn("mb-call", "mobile-bar")}<a href="${hasQuote ? "#quote" : "/contact#quote"}" class="mb-quote">${icon("mail")}<span>${L.mobileQuote}</span></a></div>
 ` : ""}
   ${lightbox}
 
@@ -382,8 +406,19 @@ const pageHero = (h1, crumbs, lead) => `  <section class="page-hero">
     </div>
   </section>`;
 
-const ctaStrip = ({ h2, p, btn = L.estimateBtn }, padTop = false) => `  <section class="section"${padTop ? ' style="padding-top:0"' : ""}>
-    <div class="container"><div class="cta-strip reveal"><div><h2>${h2}</h2><p>${p}</p></div><div class="cta-actions">${arrowBtn("/contact", btn, "btn btn--light")}${callBtn("btn btn--ghost-light", "cta-banner")}</div></div></div>
+const bottomSection = (cta, label) => `  <section class="section quote-section" id="quote">
+    <div class="container quote-grid">
+      <div class="quote-call reveal">
+        <span class="eyebrow eyebrow--light">${L.quoteEyebrow}</span>
+        <h2>${cta.h2}</h2>
+        <p>${cta.p}</p>
+        ${primaryCta("bottom", "btn btn--primary btn--lg")}
+        <ul class="quote-points">
+          ${L.quotePoints.map((t) => `<li>${icon("check")}<span>${t}</span></li>`).join("\n          ")}
+        </ul>
+      </div>
+      ${form(`New drain cleaning request — ${site.domain} (${label})`, { idPrefix: "quote", head: { title: L.formTitle, p: L.formLead } })}
+    </div>
   </section>`;
 
 const ticks = (items, ic = "check") => `<ul class="ticks">
@@ -396,11 +431,11 @@ const steps = (list, numbered = true) => `<div class="steps">
           .join("\n        ")}
       </div>`;
 
-function form(subject, { head, compact = false, idPrefix = "f" } = {}) {
+function form(subject, { head, idPrefix = "f" } = {}) {
   const id = (n) => `${idPrefix}-${n}`;
   const options = ["General Drain Cleaning", ...SERVICES.map((s) => s.name), "Emergency / Backed-Up Drain", "Not Sure Yet"];
-  return `<form class="contact-form${compact ? " hero-form" : ""} reveal" action="https://api.web3forms.com/submit" method="POST" data-web3form>
-        ${head ? `<div class="form-head"><h2>${head.h2}</h2><p>${head.p}</p></div>` : ""}
+  return `<form class="contact-form reveal" action="https://api.web3forms.com/submit" method="POST" data-web3form>
+        ${head ? `<div class="form-head"><h3>${head.title}</h3><p>${head.p}</p></div>` : ""}
         <input type="hidden" name="access_key" value="${site.web3formsKey}">
         <input type="hidden" name="subject" value="${esc(subject)}">
         <input type="hidden" name="from_name" value="${esc(site.siteName)} Website">
@@ -459,7 +494,7 @@ function serviceCards(list, { withImg = true, link = L.cardLink } = {}) {
           <div class="s-body"><span class="s-ico">${icon(s.icon)}</span>
             <h3>${s.name}</h3>
             <p>${s.short}</p>
-            ${s.slug ? `<a href="/${s.slug}" class="s-link">${link} ${icon("arrow")}</a>` : `<a href="/contact" class="s-link">${L.emergencyLink} ${icon("arrow")}</a>`}
+            ${s.slug ? `<a href="/${s.slug}" class="s-link">${link} ${icon("arrow")}</a>` : primaryCta("emergency-card", "s-link", L.emergencyLink)}
           </div>
         </article>`
           )
@@ -492,8 +527,7 @@ const pages = [];
         <h1>${h.h1}</h1>
         <p class="lead">${h.lead}</p>
         <div class="hero-cta">
-          ${arrowBtn("/contact", L.estimateBtn)}
-          ${callBtn("btn btn--ghost-light", "hero")}
+          ${primaryCta("hero")}
           <a href="${PRICING}" class="btn btn--ghost-light">${L.heroPricesBtn}</a>
         </div>
         <div class="hero-trust">
@@ -504,7 +538,7 @@ const pages = [];
           ${h.stats.map(([n, l]) => `<div><div class="num">${n}</div><div class="lbl">${l}</div></div>`).join("\n          ")}
         </div>
       </div>
-      ${form(`New drain cleaning request — ${site.domain} (Homepage)`, { head: h.formHead, compact: true, idPrefix: "hero" })}
+      ${callCard("hero-card")}
     </div>
   </section>
 
@@ -578,7 +612,7 @@ const pages = [];
     </div>
   </section>
 
-${ctaStrip(h.cta)}`;
+${bottomSection(h.cta, "Homepage")}`;
   pages.push({
     file: "index.html",
     html: layout({
@@ -604,7 +638,7 @@ ${ctaStrip(h.cta)}`;
         <h2>${a.h2}</h2>
         ${a.paras.map((t) => `<p>${t}</p>`).join("\n        ")}
         ${ticks(a.points)}
-        ${arrowBtn("/contact", L.aboutBtn)}
+        ${btnRow("about")}
       </div>
       <div class="reveal media-stack">${img(a.img)}<div class="exp-badge exp-badge--inline"><b>${B.years}</b><span>${L.expBadgeAbout}</span></div></div>
     </div>
@@ -624,7 +658,7 @@ ${ctaStrip(h.cta)}`;
     </div>
   </section>
 
-${ctaStrip(a.cta, true)}`;
+${bottomSection(a.cta, "About page")}`;
   pages.push({ file: "about.html", html: layout({ path: "/about", title: a.title, description: a.description, body, schema: [crumbsLd([["Home", "/"], ["About", "/about"]])] }) });
 }
 
@@ -648,7 +682,7 @@ ${ctaStrip(a.cta, true)}`;
     </div>
   </section>
 
-${ctaStrip(s.cta)}`;
+${bottomSection(s.cta, "Services page")}`;
   pages.push({
     file: "services.html",
     html: layout({
@@ -684,7 +718,7 @@ for (const s of SERVICES) {
         ${ticks(s.offer)}
         <h3>${s.signsTitle}</h3>
         ${ticks(s.signs, "plus")}
-        ${arrowBtn("/contact", s.btn)}
+        ${btnRow(s.slug)}
       </div>
       <div class="reveal sticky-media">${img(s.img)}
         <div class="side-card">
@@ -703,7 +737,7 @@ for (const s of SERVICES) {
     </div>
   </section>
 
-${ctaStrip(s.cta)}`;
+${bottomSection(s.cta, `${s.name} page`)}`;
   pages.push({
     file: `${s.slug}.html`,
     html: layout({
@@ -736,7 +770,7 @@ ${ctaStrip(s.cta)}`;
     </div>
   </section>
 
-${ctaStrip(g.cta)}`;
+${bottomSection(g.cta, "Gallery page")}`;
   pages.push({ file: "gallery.html", html: layout({ path: "/gallery", title: g.title, description: g.description, body, schema: [crumbsLd([["Home", "/"], ["Gallery", "/gallery"]])] }) });
 }
 
@@ -761,7 +795,7 @@ ${ctaStrip(g.cta)}`;
         <h2>${pg.intro.h2}</h2>
         ${pg.intro.paras.map((t) => `<p>${t}</p>`).join("\n        ")}
         ${ticks(pg.intro.points)}
-        ${arrowBtn("/contact", L.estimateBtn)}
+        ${btnRow("pricing-intro")}
       </div>
       <div class="reveal">${img(pg.intro.img)}</div>
     </div>
@@ -797,7 +831,7 @@ ${ctaStrip(g.cta)}`;
           <ul>
             ${t.items.map((i) => `<li>${icon("check")}<span>${i}</span></li>`).join("\n            ")}
           </ul>
-          ${arrowBtn("/contact", L.quoteTier, t.featured ? "btn btn--primary" : "btn btn--ghost")}
+          ${primaryCta("pricing-tier", t.featured ? "btn btn--primary" : "btn btn--ghost", L.tierCall)}
         </article>`
           )
           .join("\n        ")}
@@ -884,7 +918,7 @@ ${ctaStrip(g.cta)}`;
     </div>
   </section>
 
-${ctaStrip(pg.cta)}`;
+${bottomSection(pg.cta, "Pricing page")}`;
 
   const videoLd = {
     "@context": "https://schema.org",
@@ -930,11 +964,12 @@ ${ctaStrip(pg.cta)}`;
         <ul class="info-list">
           ${L.contactInfo.map(([ic, t, v]) => `<li>${icon(ic)}<div><b>${t}</b><span>${v.replace("{areas}", site.areas.join(", "))}</span></div></li>`).join("\n          ")}
         </ul>
-        ${CALL ? `<div class="contact-call" data-call-wrap><p>${L.callPrompt}</p>${callBtn("btn btn--call", "contact-page")}</div>` : ""}
       </div>
-      ${form(`New drain cleaning request — ${site.domain} (Contact page)`, { idPrefix: "contact", head: { h2: L.contactFormH2, p: c.formP } })}
+      ${callCard("contact-card")}
     </div>
-  </section>`;
+  </section>
+
+${bottomSection(c.cta, "Contact page")}`;
   pages.push({ file: "contact.html", html: layout({ path: "/contact", title: c.title, description: c.description, body, schema: [crumbsLd([["Home", "/"], ["Contact", "/contact"]])] }) });
 }
 
@@ -945,12 +980,13 @@ pages.push({
   html: layout({
     path: "/thank-you",
     title: `Thank You | ${B.name}`,
-    description: "Your request was sent. We'll be in touch shortly.",
+    description: "Your request was sent. We'll get back to you in minutes.",
     noindex: true,
+    hasQuote: false,
     body: `${pageHero("Thanks, Your Request Was Sent", [["Home", "/"], ["Thank You", "/thank-you"]])}
   <section class="section"><div class="container narrow center-text">
-    <p class="lead-dark">We got your message and will reach out shortly with next steps and an upfront price. If water is backing up right now, avoid running sinks, showers, the dishwasher and the washer until the line is cleared.</p>
-    <div class="center-btn">${arrowBtn("/", "Back To Home", "btn btn--ghost")} ${arrowBtn(PRICING, "See Pricing")}</div>
+    <p class="lead-dark">We got your message and we'll get back to you in minutes with next steps and an upfront price. If water is backing up right now, avoid running sinks, showers, the dishwasher and the washer until the line is cleared.</p>
+    <div class="center-btn">${primaryCta("thank-you")} ${arrowBtn("/", "Back To Home", "btn btn--ghost")}</div>
   </div></section>`,
   }),
 });
@@ -967,8 +1003,10 @@ pages.push({
     body: `${pageHero("Page Not Found", [["Home", "/"], ["404", "/404"]])}
   <section class="section"><div class="container narrow center-text">
     <p class="lead-dark">That page isn't here. Try one of these instead:</p>
-    <div class="center-btn">${arrowBtn("/services", "Our Services", "btn btn--ghost")} ${arrowBtn(PRICING, "Pricing", "btn btn--ghost")} ${arrowBtn("/contact", "Free Estimate")}</div>
-  </div></section>`,
+    <div class="center-btn">${arrowBtn("/services", "Our Services", "btn btn--ghost")} ${arrowBtn(PRICING, "Pricing", "btn btn--ghost")} ${primaryCta("404")}</div>
+  </div></section>
+
+${bottomSection(site.home.cta, "404 page")}`,
   }),
 });
 
