@@ -20,6 +20,7 @@ const strip = (s = "") => String(s).replace(/<[^>]+>/g, "").replace(/&nbsp;/g, "
 const abs = (p) => site.origin + p;
 const money = (n) => "$" + Number(n).toLocaleString("en-US");
 
+// Content hash used as ?v= on asset URLs, so a replaced file always gets a URL no cache has seen.
 function hashFile(rel) {
   return crypto.createHash("sha1").update(fs.readFileSync(path.join(STATIC, rel))).digest("hex").slice(0, 8);
 }
@@ -39,7 +40,7 @@ function imageSize(file) {
 const IMG = {};
 for (const [key, v] of Object.entries(site.images)) {
   const [w, h] = imageSize(path.join(STATIC, "images", v.file));
-  IMG[key] = { ...v, w, h, src: "/images/" + v.file };
+  IMG[key] = { ...v, w, h, src: `/images/${v.file}?v=${hashFile("images/" + v.file)}` };
 }
 function img(key, { eager = false, cls = "", alt } = {}) {
   const i = IMG[key];
@@ -203,6 +204,7 @@ const faqLd = (faqs) => ({
 
 // ---------- layout ----------
 const CSS_V = hashFile("css/styles.css");
+const OG = `/og-image.jpg?v=${hashFile("og-image.jpg")}`;
 // Per-site colour overrides (site.theme keys are CSS custom property names without the leading --)
 const THEME_CSS = site.theme ? `\n  <style>:root{${Object.entries(site.theme).map(([k, v]) => `--${k}:${v}`).join(";")}}</style>` : "";
 const JS_V = hashFile("js/main.js");
@@ -318,9 +320,9 @@ function layout({ path: p, title, description, body, schema = [], noindex = fals
   <meta name="description" content="${esc(description)}">
   <meta name="robots" content="${noindex ? "noindex, follow" : "index, follow, max-image-preview:large"}">
   <link rel="canonical" href="${canonical}">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=${hashFile("favicon-32.png")}">
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png?v=${hashFile("favicon.png")}">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=${hashFile("apple-touch-icon.png")}">
   <meta name="theme-color" content="${site.theme?.navy || "#0b2545"}">
   <meta property="og:title" content="${esc(title)}">
   <meta property="og:description" content="${esc(description)}">
@@ -328,14 +330,14 @@ function layout({ path: p, title, description, body, schema = [], noindex = fals
   <meta property="og:url" content="${canonical}">
   <meta property="og:site_name" content="${esc(site.siteName)}">
   <meta property="og:locale" content="en_US">
-  <meta property="og:image" content="${abs("/og-image.jpg")}">
+  <meta property="og:image" content="${abs(OG)}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="${esc(`Drain cleaning in ${site.city}, ${site.state} by ${strip(B.name)}`)}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${esc(title)}">
   <meta name="twitter:description" content="${esc(description)}">
-  <meta name="twitter:image" content="${abs("/og-image.jpg")}">
+  <meta name="twitter:image" content="${abs(OG)}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
